@@ -1,0 +1,23 @@
+{
+  "name": "heartsyncapi",
+  "version": "1.0.0",
+  "description": "API for connecting those in long distance relationships",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GageDorl/heartSyncAPI.git"
+  },
+  "author": "gagedorl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GageDorl/heartSyncAPI/issues"
+  },
+  "homepage": "https://github.com/GageDorl/heartSyncAPI#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
