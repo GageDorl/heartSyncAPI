@@ -23,6 +23,7 @@ const letterSchema = new mongoose.Schema({
     },
     type: {
         type: String,
+        enum: ['draft', 'sent'],
         required: true,
         trim: true
     },

@@ -1,0 +1,32 @@
+@import "./styles.css";
+
+
+.dashboard{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.checkin-btn{
+    background-color: var(--light-color);
+    color: var(--accent-color);
+    border: 5px solid var(--accent-color);
+    height: 100px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s ease;
+    &:hover{
+        background-color: var(--accent-color);
+        color: var(--light-color);
+    }
+    &:active{
+        transform: scale(0.95);
+    }
+}
+
+#milestones{
+    flex-grow: 2;
+}

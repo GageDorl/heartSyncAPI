@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/new-user.js"></script>
+    <link rel="stylesheet" href="/css/new-user.css">
+    <title>HeartSync - New User</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Welcome to HeartSync!</h1>
+        <form id="new-user-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="timezone">Timezone:</label>
+            <select id="timezone" name="timezone" required>
+                <option value="EST">EST</option>
+                <option value="CST">CST</option>
+                <option value="MST">MST</option>
+                <option value="PST">PST</option>
+                <option value="GMT">GMT</option>
+                <option value="CET">CET</option>
+                <option value="IST">IST</option>
+                <option value="JST">JST</option>
+                <option value="AEST">AEST</option>
+                <option value="ACST">ACST</option>
+                <option value="AWST">AWST</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <button type="submit" class="create-profile-btn">Create Profile</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+@import './styles.css';
+
+#new-user-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: clamp(300px, 50%, 500px);
+    margin: 0 auto;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+    label{
+        font-weight: bold;
+    }
+    input, select, textarea{
+        padding: 10px;
+        border: 1px solid var(--accent-color);
+        border-radius: 5px;
+        font-size: 1rem;
+        font-family: inherit;
+        resize: vertical;
+    }
+    button{
+        background-color: var(--accent-color);
+        color: var(--light-color);
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s ease;
+        &:hover{
+            background-color: var(--primary-color);
+        }
+        &:active{
+            transform: scale(0.95);
+        }
+    }
+}

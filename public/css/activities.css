@@ -1,0 +1,70 @@
+@import "./styles.css";
+
+.activities-board{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    .section{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        ul{
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .activity-card{
+                a{
+                    color: inherit;
+                }
+                background-color: var(--secondary-color);
+                border-radius: 8px;
+                padding: 25px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 250px;
+            }
+        }
+    }
+}
+
+.add-activity-form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    label{
+        font-weight: bold;
+    }
+    input, select, textarea{
+        padding: 10px;
+        border: 1px solid var(--accent-color);
+        border-radius: 5px;
+        font-size: 1rem;
+        font-family: inherit;
+        resize: vertical;
+    }
+    button{
+        background-color: var(--accent-color);
+        color: var(--light-color);
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s ease;
+        &:hover{
+            background-color: var(--primary-color);
+        }
+        &:active{
+            transform: scale(0.95);
+        }
+    }
+}
+
+@media screen and (min-width: 900px){
+    .activities-board{
+        flex-wrap:nowrap;
+    }
+}

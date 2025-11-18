@@ -11,7 +11,7 @@ export async function connectDB() {
         await mongoose.connect(uri, {
             dbName: 'heartSyncAPI',
         });
-        console.log('Connected to MongoDB');
+        console.log('Connected to '+mongoose.connection.name+' MongoDB database');
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
         process.exit(1);

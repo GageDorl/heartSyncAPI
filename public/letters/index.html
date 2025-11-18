@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/letters.js"></script>
+    <link rel="stylesheet" href="/css/letters.css">
+    <title>HeartSync - Letters</title>
+</head>
+<body>
+    <div class="new-letter-modal-container hidden">
+        <div class="new-letter-modal">
+            <h2 class="modal-title">New Letter</h2>
+            <form class="new-letter-form">
+                <label for="letter-title">Title:</label>
+                <input type="text" id="letter-title" name="letter-title" required>
+                
+                <label for="letter-content">Content:</label>
+                <textarea id="letter-content" name="letter-content" rows="10" required></textarea>
+                
+                <div class="modal-buttons">
+                    <button type="submit" class="send-letter-btn">Send</button>
+                    <button type="button" class="save-draft-btn">Save as Draft</button>
+                    <button type="button" class="close-modal-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="title">Letters</h1>
+        <div class="letters-board">
+            <radio-group class="filter-group">
+                <input type="radio" id="inbox" name="filter" value="inbox" checked>
+                <label for="inbox">Inbox</label>
+                <input type="radio" id="sent" name="filter" value="sent">
+                <label for="sent">Sent</label>
+                <input type="radio" id="drafts" name="filter" value="drafts">
+                <label for="drafts">Drafts</label>
+            </radio-group>
+            <ul class="letter-list">
+                <li class="letter-headers">
+                    <span class="letter-title-header">Title</span>
+                    <span class="letter-date-header">Date</span>
+                </li>
+                <li class="letter-item">
+                    <span class="letter-title"><a href="#">Thinking of You</a></span>
+                    <span class="letter-date">Nov 12, 2025</span>
+                </li>
+                <li class="letter-item">
+                    <span class="letter-title"><a href="#">Miss You</a></span>
+                    <span class="letter-date">Oct 30, 2025</span>
+                </li>
+                <li class="letter-item">
+                    <span class="letter-title"><a href="#">Our Memories</a></span>
+                    <span class="letter-date">Oct 15, 2025</span>
+                </li>
+            </ul>
+        </div>
+        <button class="write-letter">+</button>
+    </div>
+</body>
+</html>

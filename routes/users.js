@@ -1,9 +1,23 @@
 import express from 'express';
 const routes = express.Router();
-import { getUser, createUser, updateUser, deleteUser } from '../controllers/userController.js';
+import { getUser, getCurrentUser, updateCurrentUser, createUser, updateUser, deleteUser } from '../controllers/userController.js';
+import pkg from 'express-openid-connect';
 
+const { auth, requiresAuth } = pkg;
+const config = {
+    authRequired:false,
+    auth0Logout:true,
+    secret: process.env.SECRET,
+    baseURL: process.env.BASE_URL,
+    clientID: process.env.CLIENT_ID,
+    issuerBaseURL: "https://dev-5fw5sq1d53v0445x.us.auth0.com"
+};
+routes.use(auth(config));
+
+routes.get('/current', requiresAuth(), getCurrentUser);
+routes.put('/current', requiresAuth(), updateCurrentUser);
 routes.get('/:id', getUser);
-routes.post('/', createUser);
+routes.post('/', requiresAuth(), createUser);
 routes.put('/:id', updateUser);
 routes.delete('/:id', deleteUser);
 
