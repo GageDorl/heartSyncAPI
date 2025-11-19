@@ -29,7 +29,7 @@ const activitySchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['idea', 'planned', 'completed', 'canceled'],
+        enum: ['idea', 'planned', 'completed', 'cancelled'],
         default: 'planned'
     }
 } , { timestamps: true });

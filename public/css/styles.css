@@ -96,13 +96,15 @@ header {
     &.error{
         background-color: var(--error-color);
     }
-    .close-btn{
-        background: none;
-        border: none;
-        color: inherit;
-        font-size: 1.2rem;
-        cursor: pointer;
-    }
+}
+
+.close-btn{
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.2rem;
+    cursor: pointer;
+    float:right;
 }
 
 .card{

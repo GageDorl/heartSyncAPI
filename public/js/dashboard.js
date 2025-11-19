@@ -8,9 +8,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderRelationshipInfo(user, relationship);
     if(relationship && relationship.status === "accepted") {
         const activities = await fetchActivities(relationship._id);
-        console.log(activities);
+        renderActivities(activities);
     }
 });
+
+function renderActivities(activities) {
+    console.log("Rendering activities:", activities);
+    const activitiesContainer = document.getElementById("activities-list");
+    activitiesContainer.innerHTML = '';
+    const plannedActivities = [];
+    if(activities && activities.length > 0) {
+        activities.forEach(activity => {
+            if(activity.status == "planned") {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${activity.title} - ${new Date(activity.date).toLocaleDateString()}`;
+                plannedActivities.push(listItem);
+            }
+        });
+        if(plannedActivities.length > 0) {
+            plannedActivities.forEach(item => activitiesContainer.appendChild(item));
+        } else {
+            const noActivitiesMessage = document.createElement("li");
+            noActivitiesMessage.textContent = "No planned activities.";
+            activitiesContainer.appendChild(noActivitiesMessage);
+        }
+    } else {
+        const listItem = document.createElement("li");
+        listItem.textContent = "No upcoming activities.";
+        activitiesContainer.appendChild(listItem);
+    }
+}
 
 async function renderRelationshipInfo(user, relationship) {
     document.getElementById("relationshipContainer").classList.add("hidden");

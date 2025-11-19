@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const relationship = await fetchRelationship(user);
     renderProfileInfo(user);
     renderRelationshipInfo(user, relationship);
+    
 });
 
 

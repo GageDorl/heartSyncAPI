@@ -105,3 +105,52 @@ export async function fetchActivities(relationshipId) {
         return [];
     }
 }
+
+export async function addActivity(relationshipId, activityData) {
+    const response = await fetch(`/api/activities/relationship/${relationshipId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(activityData)
+    });
+    console.log(response);
+    if (response.ok) {
+        const newActivity = await response.json();
+        showNotification("Activity added successfully", false);
+        return newActivity;
+    } else {
+        console.error('Failed to add activity');
+        showNotification("Failed to add activity", true);
+    }
+}
+
+export async function deleteActivity(activity) {
+    const response = await fetch(`/api/activities/relationship/${activity.relationshipId}/${activity._id}`, {
+        method: 'DELETE'
+    });
+    if (response.ok) {
+        showNotification("Activity deleted successfully", false);
+    } else {
+        console.error('Failed to delete activity');
+        showNotification("Failed to delete activity", true);
+    }
+}
+
+export async function updateActivity(activity, activityData) {
+    const response = await fetch(`/api/activities/relationship/${activity.relationshipId}/${activity._id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(activityData)
+    });
+    if (response.ok) {
+        const updatedActivity = await response.json();
+        showNotification("Activity updated successfully", false);
+        return updatedActivity;
+    } else {
+        console.error('Failed to update activity');
+        showNotification("Failed to update activity", true);
+    }
+}
