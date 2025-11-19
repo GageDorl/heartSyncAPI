@@ -13,9 +13,10 @@
         <div class="profile-info">
             <div class="profile-display">
                 <h2>Profile Details</h2>
-                <p><strong>Name:</strong> <span id="user-name"></span></p>
-                <p><strong>Timezone:</strong> <span id="user-timezone"></span></p>
-                
+                <p class="profile-item"><strong>Name:</strong> <span id="user-name"></span></p>
+                <p class="profile-item"><strong>Timezone:</strong> <span id="user-timezone"></span></p>
+                <p class="profile-item"><strong>Email:</strong> <span id="user-email"></span></p>
+                <p class="profile-item"><strong>User ID:</strong> <span id="user-id"></span></p>
                 <button id="edit-profile-btn">Edit Profile</button>
             </div>
             <form id="edit-profile" class="hidden">
@@ -43,7 +44,33 @@
                     <button type="button" class="cancel-edit-btn">Cancel</button>
                 </div>
             </form>
-
+            <div class="relationship-info profile-display">
+                <h2>Relationship Details</h2>
+                <p id="relationship-status-container" class="profile-item"><strong>Status:</strong> <span id="relationship-status"></span></p>
+                <div id="partner-info" class="hidden">
+                    <p class="profile-item"><strong>Partner Name:</strong> <span id="partner-name"></span></p>
+                    <p class="profile-item"><strong>Partner Email:</strong> <span id="partner-email"></span></p>
+                    
+                    <button id="remove-relationship-btn">Remove Relationship</button>
+                </div>
+                <div id="no-relationship">
+                    <form id="request-relationship-form" class="hidden">
+                        <label for="partner-email-input">Partner's Email:</label>
+                        <input type="email" id="partner-email-input" name="partner-email-input" required>
+                        <button type="submit" class="request-relationship-btn">Send Request</button>
+                    </form>
+                    <div id="pending-request" class="hidden">
+                        <p>Relationship request sent. Waiting for partner to accept.</p>
+                    </div>
+                    <div id="incoming-request" class="hidden">
+                        <p>You have a relationship request from <span id="requester-email"></span>.</p>
+                        <div class="form-btns">
+                            <button id="accept-request-btn">Accept</button>
+                            <button id="decline-request-btn">Decline</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

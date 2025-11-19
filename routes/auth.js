@@ -25,7 +25,13 @@ const doesUserExist = async (authID) => {
 routes.use(auth(config));
 
 
-routes.get('/', requiresAuth(), (req, res) => {
+routes.get('/', requiresAuth(), async (req, res) => {
+    const authID = req.oidc.user.sub;
+    let user = await doesUserExist(authID);
+    if (!user) {
+        res.redirect('/new-user');
+        return;
+    }
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 

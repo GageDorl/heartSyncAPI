@@ -12,11 +12,28 @@ const header = `
             <li><a href="/stats">Stats</a></li>
         </ul>
     </nav>
-</header>`;
+</header>
+<div id="notification" class="notification hidden"></div>
+`;
 
 export function renderHeader() {
     document.body.insertAdjacentHTML('afterbegin', header);
     document.querySelector('.mobile-menu-toggle').addEventListener('click', () => {
         document.querySelector('nav').classList.toggle('open');
     });
+
+}
+
+export function showNotification(message, isError = false) {
+    const notification = document.getElementById('notification');
+    notification.innerHTML = `
+        <p>${message}</p>
+        <span class="close-btn" onclick="this.parentElement.classList.add('hidden')">&times;</span>
+    `;
+    if (isError) {
+        notification.classList.add('error');
+    } else {
+        notification.classList.remove('error');
+    }
+    notification.classList.remove('hidden');
 }

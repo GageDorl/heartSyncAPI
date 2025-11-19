@@ -1,10 +1,11 @@
 import express from 'express';
 const routes = express.Router();
-import { getRelationships, addRelationship, removeRelationship } from '../controllers/relationshipController.js';
+import { getRelationship, addRelationship, addRelationshipWithEmail, updateRelationshipStatus } from '../controllers/relationshipController.js';
 
-routes.get('/:userId', getRelationships);
 routes.post('/', addRelationship);
-routes.delete('/:userId/:relationshipId', removeRelationship);
+routes.post('/request', addRelationshipWithEmail);
+routes.get('/:userId', getRelationship);
+routes.put('/:userId/:relationshipId', updateRelationshipStatus);
 
 export default routes;
 
