@@ -20,7 +20,7 @@
                 
                 <div class="modal-buttons">
                     <button type="submit" class="send-letter-btn">Send</button>
-                    <button type="button" class="save-draft-btn">Save as Draft</button>
+                    <button type="submit" class="save-draft-btn">Save as Draft</button>
                     <button type="button" class="close-modal-btn">Cancel</button>
                 </div>
             </form>
@@ -34,7 +34,7 @@
                 <label for="inbox">Inbox</label>
                 <input type="radio" id="sent" name="filter" value="sent">
                 <label for="sent">Sent</label>
-                <input type="radio" id="drafts" name="filter" value="drafts">
+                <input type="radio" id="drafts" name="filter" value="draft">
                 <label for="drafts">Drafts</label>
             </radio-group>
             <ul class="letter-list">
@@ -43,16 +43,7 @@
                     <span class="letter-date-header">Date</span>
                 </li>
                 <li class="letter-item">
-                    <span class="letter-title"><a href="#">Thinking of You</a></span>
-                    <span class="letter-date">Nov 12, 2025</span>
-                </li>
-                <li class="letter-item">
-                    <span class="letter-title"><a href="#">Miss You</a></span>
-                    <span class="letter-date">Oct 30, 2025</span>
-                </li>
-                <li class="letter-item">
-                    <span class="letter-title"><a href="#">Our Memories</a></span>
-                    <span class="letter-date">Oct 15, 2025</span>
+                    <a class="letter-title">Loading...</a>
                 </li>
             </ul>
         </div>

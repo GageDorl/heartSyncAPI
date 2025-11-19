@@ -59,7 +59,32 @@ function renderActivities(activities) {
         });
         const editBtn = listItem.querySelector(".edit-activity-btn");
         editBtn.addEventListener("click", async () => {
-            console.log(`Edit activity with ID: ${activity._id}`);
+            const addActivityForm = document.querySelector(".add-activity-form");
+            addActivityForm.querySelector("#activity-title").value = activity.title;
+            addActivityForm.querySelector("#activity-description").value = activity.description;
+            addActivityForm.querySelector("#activity-category").value = activity.category;
+            addActivityForm.querySelector("#activity-date").value = activity.date.split('T')[0];
+            addActivityForm.querySelector("#activity-duration").value = activity.duration;
+            addActivityForm.querySelector("#activity-status").value = activity.status;
+            const addButton = document.querySelector("#add-activity-btn");
+            addButton.textContent = "Update Activity";
+            addButton.onclick = async (e) => {
+                e.preventDefault();
+                const updatedActivity = {
+                    title: addActivityForm.querySelector("#activity-title").value,
+                    description: addActivityForm.querySelector("#activity-description").value,
+                    category: addActivityForm.querySelector("#activity-category").value,
+                    date: addActivityForm.querySelector("#activity-date").value,
+                    duration: addActivityForm.querySelector("#activity-duration").value,
+                    status: addActivityForm.querySelector("#activity-status").value
+                };
+                await updateActivity(activity, updatedActivity);
+                renderActivities(await fetchActivities(activity.relationshipId));
+                console.log(`Updated activity with ID: ${activity._id}`);
+                addActivityForm.reset();
+                addButton.textContent = "Add Activity";
+                addButton.onclick = null;
+            };
         });
 
         if(activity.status === "planned") {

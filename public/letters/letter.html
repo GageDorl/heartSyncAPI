@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/singleLetter.js"></script>
+    <link rel="stylesheet" href="/css/letters.css">
+    <title>HeartSync - Letter Details</title>
+</head>
+<body>
+    <div class="container">
+        <button class="back-to-letters-btn">← Back to Letters</button>
+        <div class="letter card sent-letter hidden">
+            <p class="letter-sender" id="letter-sender">From: <span class="letter-sender-name"></span></p>
+            <p class="letter-recipient" id="letter-recipient">To: <span class="letter-recipient-name"></span></p>
+            <p class="letter-date"></p>
+            <h1 class="letter-title" id="letter-title"></h1>
+            <div class="letter-content" id="letter-content"></div>
+        </div>
+        <div class="letter card draft-letter hidden">
+            <p class="letter-sender" id="draft-letter-sender">From: <span class="letter-sender-name"></span></p>
+            <p class="letter-recipient" id="draft-letter-recipient">To: <span class="letter-recipient-name"></span></p>
+            <p class="letter-date"></p>
+            <form class="draft-letter-form">
+                <input type="text" class="letter-title" id="draft-letter-title" placeholder="Letter Title">
+                <textarea class="letter-content" id="draft-letter-content" rows="10"></textarea>
+                <div class="form-btns">
+                    <button class="send-letter-btn">Send Letter</button>
+                    <button class="save-draft-btn">Save Changes</button>
+                    <button class="delete-draft-btn">Delete Draft</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

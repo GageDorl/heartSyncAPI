@@ -42,6 +42,11 @@ routes.get('/activities', requiresAuth(), (req, res) => {
 routes.get('/letters', requiresAuth(), (req, res) => {
     res.sendFile(path.join(__dirname, '../public/letters/index.html'));
 });
+
+routes.get('/letters/:letterId', requiresAuth(), (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/letters/letter.html'));
+});
+
 routes.use('/callback', (req, res) => {
     res.redirect('/');
 });

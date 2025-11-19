@@ -154,3 +154,73 @@ export async function updateActivity(activity, activityData) {
         showNotification("Failed to update activity", true);
     }
 }
+
+export async function fetchLetters(relationshipId) {
+    const response = await fetch(`/api/letters/relationship/${relationshipId}`);
+    if (response.ok) {
+        return await response.json();
+    } else {
+        console.error(`Failed to fetch letters for relationship ${relationshipId}`);
+        showNotification("Failed to fetch letters", true);
+        return [];
+    }
+}
+
+export async function fetchLetter(relationship, letterId) {
+    const response = await fetch(`/api/letters/relationship/${relationship._id}/${letterId}`);
+    if (response.ok) {
+        return await response.json();
+    } else {
+        console.error(`Failed to fetch letter with id ${letterId}`);
+        showNotification("Failed to fetch letter", true);
+        return null;
+    }
+}
+
+export async function saveLetter(letterData){
+    const response = await fetch(`/api/letters/relationship/${letterData.relationshipId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(letterData)
+    });
+    if (response.ok) {
+        const newLetter = await response.json();
+        showNotification("Letter sent successfully", false);
+        return newLetter;
+    } else {
+        console.error('Failed to send letter');
+        showNotification("Failed to send letter", true);
+    }
+}
+
+export async function updateLetter(letter){
+    const response = await fetch(`/api/letters/relationship/${letter.relationshipId}/${letter._id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(letter)
+    });
+    if (response.ok) {
+        const updatedLetter = await response.json();
+        showNotification("Letter updated successfully", false);
+        return updatedLetter;
+    } else {
+        console.error('Failed to update letter');
+        showNotification("Failed to update letter", true);
+    }
+}
+
+export async function deleteLetter(letter) {
+    const response = await fetch(`/api/letters/relationship/${letter.relationshipId}/${letter._id}`, {
+        method: 'DELETE'
+    });
+    if (response.ok) {
+        showNotification("Letter deleted successfully", false);
+    } else {
+        console.error('Failed to delete letter');
+        showNotification("Failed to delete letter", true);
+    }
+}

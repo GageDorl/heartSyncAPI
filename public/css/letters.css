@@ -40,20 +40,18 @@
             color: var(--light-color);
             padding: 5px 10px;
         }
-        .letter-item{
+        .letter-item a{
             display: flex;
             flex-direction: row;
             background-color: var(--secondary-color);
             justify-content: space-between;
             padding: 8px 10px;
             border-bottom: 1px solid var(--accent-color);
+            color: inherit;
+            text-decoration: none;
+            flex-grow: 1;
             &:last-of-type{
                 border-bottom: none;
-            }
-            a{
-                color: inherit;
-                text-decoration: none;
-                flex-grow: 1;
             }
         }
     }
@@ -101,5 +99,20 @@
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
+    }
+}
+
+.back-to-letters-btn{
+    width: fit-content;
+    align-self: flex-start;
+}
+
+.letter{
+    margin-top: 20px;
+    font-size: clamp(.8rem, 2.5vw, 1.1rem);
+    .letter-title{
+        font-size: clamp(1.2rem, 5vw, 2rem);
+        margin-top: 30px;
+        margin-bottom: 10px;
     }
 }

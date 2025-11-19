@@ -2,10 +2,10 @@ import express from 'express';
 const routes = express.Router();
 import { getLetters, createLetter, getLetterById, updateLetter, deleteLetter } from '../controllers/letterController.js';
 
-routes.get('/relationships/:id', getLetters);
-routes.post('/relationships/:id', createLetter);
-routes.get('/relationships/:id/:letterId', getLetterById);
-routes.put('/relationships/:id/:letterId', updateLetter);
-routes.delete('/relationships/:id/:letterId', deleteLetter);
+routes.get('/relationship/:id', getLetters);
+routes.post('/relationship/:id', createLetter);
+routes.get('/relationship/:id/:letterId', getLetterById);
+routes.put('/relationship/:id/:letterId', updateLetter);
+routes.delete('/relationship/:id/:letterId', deleteLetter);
 
 export default routes;
