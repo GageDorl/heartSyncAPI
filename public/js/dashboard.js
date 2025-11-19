@@ -1,11 +1,15 @@
 import { renderHeader } from "../partials/header";
-import { fetchCurrentUser, fetchRelationship, requestRelationship, getUserInfo, respondToRequest } from "./fetch-data.mjs";
+import { fetchCurrentUser, fetchRelationship, requestRelationship, getUserInfo, respondToRequest, fetchActivities } from "./fetch-data.mjs";
 
 document.addEventListener("DOMContentLoaded", async () => {
     renderHeader();
     const user = await fetchCurrentUser();
     const relationship = await fetchRelationship(user);
     renderRelationshipInfo(user, relationship);
+    if(relationship && relationship.status === "accepted") {
+        const activities = await fetchActivities(relationship._id);
+        console.log(activities);
+    }
 });
 
 async function renderRelationshipInfo(user, relationship) {
@@ -50,12 +54,9 @@ relationshipForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const partnerEmail = document.getElementById("partner-email-input").value;
     const user = await fetchCurrentUser();
-    const response = await requestRelationship(user, partnerEmail);
-    if (response.ok) {
-        alert("Relationship request sent successfully!");
-        window.location.reload();
-    } else {
-        alert("Failed to send relationship request. Please try again.");
+    const relationship = await requestRelationship(user, partnerEmail);
+    if(relationship) {
+        renderRelationshipInfo(user, relationship);
     }
 });
 

@@ -1,4 +1,4 @@
-import { renderHeader } from "../partials/header";
+import { renderHeader, showNotification } from "../partials/header";
 
 document.addEventListener("DOMContentLoaded", () => {
     renderHeader();
@@ -21,8 +21,12 @@ async function createNewUser(event) {
 
     if (response.ok) {
         const newUser = await response.json();
-        console.log('New user created:', newUser);
+        showNotification("User created successfully!", false);
+        setTimeout(() => {
+            window.location.href = "/profile";
+        }, 1500);
     } else {
         console.error('Error creating user:', response.statusText);
+        showNotification("Error creating user. Please try again.", true);
     }
 }

@@ -7,6 +7,7 @@ const header = `
     <nav>
         <ul>
             <li><a href="/">Dashboard</a></li>
+            <li><a href="/profile">Profile</a></li>
             <li><a href="/activities">Activities</a></li>
             <li><a href="/letters">Letters</a></li>
             <li><a href="/stats">Stats</a></li>

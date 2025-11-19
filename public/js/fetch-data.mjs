@@ -63,7 +63,8 @@ export async function requestRelationship(user, partnerEmail) {
 
     if (response.ok) {
         const relationship = await response.json();
-        displayRelationship(user, relationship);
+        showNotification("Relationship request sent successfully", false);
+        return relationship;
     } else {
         console.error(`Failed to send relationship request: ${JSON.stringify(await response.json())}`);
         showNotification("Failed to send relationship request", true);
@@ -81,10 +82,26 @@ export async function respondToRequest(user, relationshipId, choice) {
 
     if (response.ok) {
         const updatedRelationship = await response.json();
-        showNotification("Successfully responded to relationship request", false);
-        return updatedRelationship;
+        if(choice === 'blocked') {
+            showNotification("Relationship request removed or blocked", false);
+            return null;
+        } else {
+            showNotification("Successfully responded to relationship request", false);
+            return updatedRelationship;
+        }
     } else {
         console.error('Failed to respond to relationship request');
         showNotification("Failed to respond to relationship request", true);
+    }
+}
+
+export async function fetchActivities(relationshipId) {
+    const response = await fetch(`/api/activities/relationship/${relationshipId}`);
+    if (response.ok) {
+        return await response.json();
+    } else {
+        console.error(`Failed to fetch activities for relationship ${relationshipId}`);
+        showNotification("Failed to fetch activities", true);
+        return [];
     }
 }

@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 async function renderProfileInfo(user) {
-    console.log(user);
     document.getElementById('user-name').textContent = user.name;
     document.getElementById('user-timezone').textContent = user.timezone;
     document.getElementById('user-email').textContent = user.email;
@@ -98,7 +97,8 @@ requestForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const partnerEmail = document.getElementById('partner-email-input').value;
     const user = await fetchCurrentUser();
-    requestRelationship(user, partnerEmail);
+    const relationship = await requestRelationship(user, partnerEmail);
+    renderRelationshipInfo(user, relationship);
 });
 
 const acceptBtn = document.getElementById('accept-request-btn');
