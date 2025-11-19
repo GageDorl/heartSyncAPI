@@ -1,7 +1,7 @@
 const header = `
 <header>
     <div class="header-content">
-        <h3><a href="/">HeartSync</a></h3>
+        <h3 class="logo"><a href="/"><img src="/images/heart-logo.svg" alt="HeartSync Logo">HeartSync</a></h3>
         <div class="mobile-menu-toggle">☰</div>
     </div>
     <nav>

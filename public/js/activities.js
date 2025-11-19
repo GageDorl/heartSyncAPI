@@ -59,10 +59,10 @@ function renderActivities(activities) {
             plannedActivities.classList.add("droppable");
             ideas.classList.add("droppable");
             completedActivities.classList.add("droppable");
-            listItem.style.top = `calc(${e.clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
+            listItem.style.top = `calc(${e.clientY}px + ${document.documentElement.scrollTop}px - ${listItem.offsetHeight / 2}px)`;
             listItem.style.left = `calc(${e.clientX}px - ${listItem.offsetWidth / 2}px)`;
             const onMouseMove = (e) => {
-                listItem.style.top = `calc(${e.clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
+                listItem.style.top = `calc(${e.clientY}px + ${document.documentElement.scrollTop}px - ${listItem.offsetHeight / 2}px)`;
                 listItem.style.left = `calc(${e.clientX}px - ${listItem.offsetWidth / 2}px)`;
             };
             const onMouseUp = () => {
@@ -98,11 +98,11 @@ function renderActivities(activities) {
             plannedActivities.classList.add("droppable");
             ideas.classList.add("droppable");
             completedActivities.classList.add("droppable");
-            listItem.style.top = `calc(${e.touches[0].clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
+            listItem.style.top = `calc(${e.touches[0].clientY}px + ${document.documentElement.scrollTop}px - ${listItem.offsetHeight / 2}px)`;
             listItem.style.left = `calc(${e.touches[0].clientX}px - ${listItem.offsetWidth / 2}px)`;
             const onTouchMove = (e) => {
 
-                listItem.style.top = `calc(${e.touches[0].clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
+                listItem.style.top = `calc(${e.touches[0].clientY}px + ${document.documentElement.scrollTop}px - ${listItem.offsetHeight / 2}px)`;
                 listItem.style.left = `calc(${e.touches[0].clientX}px - ${listItem.offsetWidth / 2}px)`;
             };
             const onTouchEnd = () => {

@@ -81,6 +81,10 @@ routes.get('/css/:file', (req, res) => {
     res.sendFile(path.join(__dirname, `../public/css/${req.params.file}`));
 });
 
+routes.get('/images/:file', (req, res) => {
+    res.sendFile(path.join(__dirname, `../public/images/${req.params.file}`));
+});
+
 routes.get('/partials/:file', (req, res) => {
     res.sendFile(path.join(__dirname, `../public/partials/${req.params.file}.js`));
 });

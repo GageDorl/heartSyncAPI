@@ -6,6 +6,12 @@
     box-sizing: border-box;
     color: inherit;
     scroll-behavior: smooth;
+    font-family: Futura,Trebuchet MS,Arial,sans-serif; 
+}
+
+img{
+    max-width: 100%;
+    height: auto;
 }
 
 a{
@@ -14,7 +20,6 @@ a{
 }
 
 body {
-    font-family: Arial, sans-serif;
     background-color: var(--light-color);
     color: var(--primary-color);
 }
@@ -30,6 +35,17 @@ body {
         margin: 20px 0;
         font-size: clamp(1.5rem, 6vw, 2.5rem);
     }
+}
+
+.logo a{
+    img{
+        height: clamp(30px, 5vw, 50px);
+    }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(1.2rem, 4vw, 2rem);
 }
 
 header {
