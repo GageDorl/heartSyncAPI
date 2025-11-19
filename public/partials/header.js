@@ -36,4 +36,9 @@ export function showNotification(message, isError = false) {
         notification.classList.remove('error');
     }
     notification.classList.remove('hidden');
+    notification.classList.add('fade-out');
+
+    setTimeout(() => {
+        notification.classList.add('hidden');
+    }, 5000);
 }

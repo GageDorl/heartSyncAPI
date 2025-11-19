@@ -5,8 +5,9 @@ import { fetchRelationship, fetchCurrentUser, updateUser, getUserInfo, requestRe
 document.addEventListener("DOMContentLoaded", async () => {
     renderHeader();
     const user = await fetchCurrentUser();
+    const relationship = await fetchRelationship(user);
     renderProfileInfo(user);
-    renderRelationshipInfo(user);
+    renderRelationshipInfo(user, relationship);
 });
 
 
@@ -57,8 +58,12 @@ saveButton.addEventListener('click', async (event) => {
     }
 });
 
-async function renderRelationshipInfo(user) {
-    const relationship = await fetchRelationship(user);
+async function renderRelationshipInfo(user, relationship=null) {
+    document.getElementById('request-relationship-form').classList.add('hidden');
+    document.getElementById('partner-info').classList.add('hidden');
+    document.getElementById('pending-request').classList.add('hidden');
+    document.getElementById('incoming-request').classList.add('hidden');
+
     if(relationship) {
         displayRelationship(user, relationship);
     } else {
@@ -105,12 +110,20 @@ acceptBtn.addEventListener('click', async () => {
     const user = await fetchCurrentUser();
     const relationshipId = document.getElementById('incoming-request').getAttribute('data-relationship-id');
     const updatedRelationship = await respondToRequest(user, relationshipId, 'accepted');
-    renderRelationshipInfo(user);
+    renderRelationshipInfo(user, updatedRelationship);
 });
 
 declineBtn.addEventListener('click', async () => {
     const user = await fetchCurrentUser();
     const relationshipId = document.getElementById('incoming-request').getAttribute('data-relationship-id');
     const updatedRelationship = await respondToRequest(user, relationshipId, 'blocked');
+    renderRelationshipInfo(user, updatedRelationship);
+});
+
+const removeBtn = document.getElementById('remove-relationship-btn');
+removeBtn.addEventListener('click', async () => {
+    const user = await fetchCurrentUser();
+    const relationship = await fetchRelationship(user);
+    const updatedRelationship = await respondToRequest(user, relationship._id, 'blocked');
     renderRelationshipInfo(user);
 });

@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function renderRelationshipInfo(user, relationship) {
+    document.getElementById("relationshipContainer").classList.add("hidden");
+    document.getElementById("relationshipRequest").classList.add("hidden");
+    document.getElementById("noRelationshipContainer").classList.add("hidden");
+    document.getElementById("pendingRelationshipContainer").classList.add("hidden");
     if(relationship) {
         if(relationship.status === "accepted") {
             document.getElementById("userName").textContent = user.name;
@@ -59,13 +63,15 @@ const acceptBtn = document.getElementById("accept-relationship-btn");
 const declineBtn = document.getElementById("decline-relationship-btn");
 
 acceptBtn.addEventListener("click", async () => {
+    const user = await fetchCurrentUser();
     const relationshipId = document.getElementById("relationshipRequest").getAttribute("data-relationship-id");
     const updatedRelationship = await respondToRequest(user, relationshipId, 'accepted');
-    renderRelationshipInfo(user);
+    renderRelationshipInfo(user, updatedRelationship);
 });
 
 declineBtn.addEventListener("click", async () => {
+    const user = await fetchCurrentUser();
     const relationshipId = document.getElementById("relationshipRequest").getAttribute("data-relationship-id");
     const updatedRelationship = await respondToRequest(user, relationshipId, 'blocked');
-    renderRelationshipInfo(user);
+    renderRelationshipInfo(user, updatedRelationship);
 });
