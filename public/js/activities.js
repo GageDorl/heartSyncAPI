@@ -38,8 +38,8 @@ function renderActivities(activities) {
         listItem.classList.add("activity-card");
         listItem.setAttribute("data-activity-id", activity._id);
         listItem.addEventListener("mousedown", (e) => {
-            e.preventDefault();
             if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")) return;
+            e.preventDefault();
             listItem.classList.add("dragging");
             listItem.style.top = `calc(${e.clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
             listItem.style.left = `calc(${e.clientX}px - ${listItem.offsetWidth / 2}px)`;
@@ -84,8 +84,8 @@ function renderActivities(activities) {
             document.addEventListener("mouseup", onMouseUp);
         });
         listItem.addEventListener("touchstart", (e) => {
-            e.preventDefault();
             if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")) return;
+            e.preventDefault();
             listItem.classList.add("dragging");
             listItem.style.top = `calc(${e.touches[0].clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
             listItem.style.left = `calc(${e.touches[0].clientX}px - ${listItem.offsetWidth / 2}px)`;
@@ -172,6 +172,7 @@ function renderActivities(activities) {
             addActivityForm.querySelector("#activity-status").value = activity.status;
             const addButton = document.querySelector("#add-activity-btn");
             addButton.textContent = "Update Activity";
+            window.scrollTo({ top: document.querySelector(".add-activity-form").offsetTop, behavior: 'smooth' });
             addButton.onclick = async (e) => {
                 e.preventDefault();
                 const updatedActivity = {
@@ -184,7 +185,7 @@ function renderActivities(activities) {
                 };
                 await updateActivity(activity, updatedActivity);
                 renderActivities(await fetchActivities(activity.relationshipId));
-                console.log(`Updated activity with ID: ${activity._id}`);
+                window.scrollTo({ top: document.querySelector(`[data-activity-id="${activity._id}"]`).offsetTop - 100, behavior: 'smooth' });
                 addActivityForm.reset();
                 addButton.textContent = "Add Activity";
                 addButton.onclick = null;
