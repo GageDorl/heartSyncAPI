@@ -1,3 +1,5 @@
+import { showNotification } from "../partials/header";
+
 export async function fetchRelationship(user) {
     const relationshipInfo = await fetch(`/api/relationships/${user._id}`);
 
@@ -7,8 +9,11 @@ export async function fetchRelationship(user) {
             return relationship;
         }
     } else {
-        console.error('Failed to fetch relationship info');
-        showNotification("Failed to fetch relationship info", true);
+        if (!relationshipInfo.ok && relationshipInfo.status !== 404) {
+            console.error('Failed to fetch relationship info');
+            showNotification("Failed to fetch relationship info", true);
+            return null;
+        }
         return null;
     }
 }
