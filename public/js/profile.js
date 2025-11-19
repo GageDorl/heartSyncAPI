@@ -1,5 +1,5 @@
 import { renderHeader, showNotification } from "../partials/header";
-import { fetchRelationship, fetchCurrentUser, updateUser, getUserInfo, requestRelationship } from "./fetch-data.mjs";
+import { fetchRelationship, fetchCurrentUser, updateUser, getUserInfo, requestRelationship, respondToRequest } from "./fetch-data.mjs";
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 async function renderProfileInfo(user) {
+    console.log(user);
     document.getElementById('user-name').textContent = user.name;
     document.getElementById('user-timezone').textContent = user.timezone;
     document.getElementById('user-email').textContent = user.email;
@@ -34,7 +35,8 @@ editButton.addEventListener('click', () => {
 cancelButton.addEventListener('click', () => {
     editForm.classList.add('hidden');
     profileDetails.classList.remove('hidden');
-    renderProfileInfo();
+    const user = fetchCurrentUser();
+    renderProfileInfo(user);
 });
 
 saveButton.addEventListener('click', async (event) => {
@@ -47,7 +49,8 @@ saveButton.addEventListener('click', async (event) => {
     if (response.ok) {
         editForm.classList.add('hidden');
         profileDetails.classList.remove('hidden');
-        renderProfileInfo();
+        const user = await fetchCurrentUser();
+        renderProfileInfo(user);
     } else {
         console.error('Failed to update profile');
         showNotification("Failed to update profile", true);
@@ -68,8 +71,8 @@ async function displayRelationship(user, relationship) {
     const otherUser = await getUserInfo(relationship.user2 == user._id ? relationship.user1 : relationship.user2);
     if(relationship.status == 'accepted') {
         document.getElementById('relationship-status').textContent = 'You are in a relationship!';
-        document.getElementById('partner-name').textContent = relationship.partnerName;
-        document.getElementById('partner-email').textContent = relationship.partnerEmail;
+        document.getElementById('partner-name').textContent = otherUser.name;
+        document.getElementById('partner-email').textContent = otherUser.email;
         document.getElementById('partner-info').classList.remove('hidden');
     } else if(relationship.status == 'pending') {
         if(user._id == relationship.user1) {
@@ -89,39 +92,25 @@ const requestForm = document.getElementById('request-relationship-form');
 requestForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const partnerEmail = document.getElementById('partner-email-input').value;
-    const user = await renderProfileInfo();
+    const user = await fetchCurrentUser();
     requestRelationship(user, partnerEmail);
 });
 
 const acceptBtn = document.getElementById('accept-request-btn');
 const declineBtn = document.getElementById('decline-request-btn');
 
-async function respondToRequest(user, relationshipId, choice) {
-    const response = await fetch(`/api/relationships/${user._id}/${relationshipId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ status: choice })
-    });
 
-    if (response.ok) {
-        const updatedRelationship = await response.json();
-        displayRelationship(user, updatedRelationship);
-    } else {
-        console.error('Failed to respond to relationship request');
-        showNotification("Failed to respond to relationship request", true);
-    }
-}
 
 acceptBtn.addEventListener('click', async () => {
-    const user = await renderProfileInfo();
+    const user = await fetchCurrentUser();
     const relationshipId = document.getElementById('incoming-request').getAttribute('data-relationship-id');
-    respondToRequest(user, relationshipId, 'accepted');
+    const updatedRelationship = await respondToRequest(user, relationshipId, 'accepted');
+    renderRelationshipInfo(user);
 });
 
 declineBtn.addEventListener('click', async () => {
-    const user = await renderProfileInfo();
+    const user = await fetchCurrentUser();
     const relationshipId = document.getElementById('incoming-request').getAttribute('data-relationship-id');
-    respondToRequest(user, relationshipId, 'blocked');
+    const updatedRelationship = await respondToRequest(user, relationshipId, 'blocked');
+    renderRelationshipInfo(user);
 });

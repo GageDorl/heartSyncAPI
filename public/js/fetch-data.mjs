@@ -69,3 +69,22 @@ export async function requestRelationship(user, partnerEmail) {
         showNotification("Failed to send relationship request", true);
     }
 }
+
+export async function respondToRequest(user, relationshipId, choice) {
+    const response = await fetch(`/api/relationships/${user._id}/${relationshipId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status: choice })
+    });
+
+    if (response.ok) {
+        const updatedRelationship = await response.json();
+        showNotification("Successfully responded to relationship request", false);
+        return updatedRelationship;
+    } else {
+        console.error('Failed to respond to relationship request');
+        showNotification("Failed to respond to relationship request", true);
+    }
+}
