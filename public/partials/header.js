@@ -10,6 +10,7 @@ const header = `
             <li><a href="/profile">Profile</a></li>
             <li><a href="/activities">Activities</a></li>
             <li><a href="/letters">Letters</a></li>
+            <li><a href="/checkins">Check-ins</a></li>
             <li><a href="/stats">Stats</a></li>
         </ul>
     </nav>

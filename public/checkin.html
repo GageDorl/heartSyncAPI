@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/checkin.js"></script>
+    <link rel="stylesheet" href="/css/checkin.css">
+    <title>HeartSync - Check-ins</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">
+            Check-ins
+        </h1>
+        <div class="checkinBoard">
+            <div id="todayStatus"></div>
+            <form action="submitCheckin" class="checkInForm card hidden">
+                <label for="mood">Mood:</label>
+                <input type="text" id="mood" name="mood" required>
+                <label for="closeness">Closeness Level (1-10):</label>
+                <select id="closeness" name="closeness" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <label for="notes">Notes:</label>
+                <textarea id="notes" name="notes" rows="4" cols="50"></textarea>
+                <button type="submit" class="submit-checkin-btn">Submit Check-in</button>
+            </form>
+            <ul id="checkin-list">
+
+            </ul>
+            <div class="pagination"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -47,6 +47,10 @@ routes.get('/letters/:letterId', requiresAuth(), (req, res) => {
     res.sendFile(path.join(__dirname, '../public/letters/letter.html'));
 });
 
+routes.get('/checkins', requiresAuth(), (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/checkin.html'));
+});
+
 routes.use('/callback', (req, res) => {
     res.redirect('/');
 });

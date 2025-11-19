@@ -243,3 +243,44 @@ export async function deleteLetter(letter) {
         showNotification("Failed to delete letter", true);
     }
 }
+
+export async function fetchCheckins(userId) {
+    const response = await fetch(`/api/checkins/user/${userId}`);
+    if (response.ok) {
+        return await response.json();
+    } else {
+        console.error(`Failed to fetch check-ins for user ${userId}`);
+        showNotification("Failed to fetch check-ins", true);
+        return [];
+    }
+}
+
+export async function addCheckin(checkinData) {
+    const response = await fetch(`api/checkins/user/${checkinData.userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(checkinData)
+    });
+    if (response.ok) {
+        const newCheckin = await response.json();
+        showNotification("Check-in added successfully", false);
+        return newCheckin;
+    } else {
+        console.error('Failed to add check-in');
+        showNotification("Failed to add check-in", true);
+    }
+}
+
+export async function deleteCheckin(checkin) {
+    const response = await fetch(`api/checkins/user/${checkin.userId}/${checkin._id}`, {
+        method: 'DELETE'
+    });
+    if (response.ok) {
+        showNotification("Check-in deleted successfully", false);
+    } else {
+        console.error('Failed to delete check-in');
+        showNotification("Failed to delete check-in", true);
+    }
+}

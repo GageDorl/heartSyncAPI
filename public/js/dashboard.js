@@ -1,5 +1,5 @@
 import { renderHeader } from "../partials/header";
-import { fetchCurrentUser, fetchRelationship, requestRelationship, getUserInfo, respondToRequest, fetchActivities } from "./fetch-data.mjs";
+import { fetchCurrentUser, fetchRelationship, requestRelationship, getUserInfo, respondToRequest, fetchActivities, fetchCheckins } from "./fetch-data.mjs";
 
 document.addEventListener("DOMContentLoaded", async () => {
     renderHeader();
@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const activities = await fetchActivities(relationship._id);
         renderActivities(activities);
     }
+    renderCheckinCard(user);
+
 });
 
 function renderActivities(activities) {
@@ -50,6 +52,54 @@ async function renderRelationshipInfo(user, relationship) {
             const partnerInfo = await getUserInfo(relationship.user1 === user._id ? relationship.user2 : relationship.user1);
             document.getElementById("partnerName").textContent = partnerInfo.name;
             document.getElementById("relationshipContainer").classList.remove("hidden");
+            if(relationship.anniversary){
+                const milestoneList = document.querySelector("#milestones .card-list");
+                milestoneList.innerHTML = '';
+                const anniversaryDate = new Date(relationship.anniversary);
+                const now = new Date();
+                const anniversaryYear = anniversaryDate.getFullYear();
+                const anniversaryMonth = anniversaryDate.getMonth();
+                const anniversaryDay = anniversaryDate.getDate();
+                let yearsTogether = 0;
+                let monthsTogether = 0;
+                if(anniversaryYear < now.getFullYear() && anniversaryMonth <=now.getMonth()){
+                    if (anniversaryMonth === now.getMonth() && anniversaryDay < now.getDate()) {
+                        yearsTogether = now.getFullYear() - anniversaryYear;
+                    } else {
+                        yearsTogether = (now.getFullYear() - anniversaryYear) - 1;
+                    }
+                }
+                if( yearsTogether == 0){
+                    if (now.getFullYear() === anniversaryYear) {
+                        if(now.getDate() >= anniversaryDay){
+                            monthsTogether = now.getMonth() - anniversaryMonth;
+                            
+                        } else {
+                            monthsTogether = (now.getMonth() - anniversaryMonth) - 1;
+                        }
+                    }
+                }
+                if(monthsTogether < 6){
+                    const monthsTogetherItem = document.createElement("li");
+                    monthsTogetherItem.textContent = `${monthsTogether+1} Month Anniversary: ${new Date(anniversaryYear, anniversaryMonth + monthsTogether+1, anniversaryDay).toLocaleDateString()}`;
+                    milestoneList.appendChild(monthsTogetherItem);
+                }
+                console.log('Years Together:', yearsTogether);
+                console.log('Months Together:', monthsTogether);
+                if (now < new Date(now.getFullYear(), anniversaryMonth, anniversaryDay)) {
+                    
+                    var nextAnniversary = new Date(now.getFullYear(), anniversaryMonth, anniversaryDay);
+                    const nextAnniversaryItem = document.createElement("li");
+                    nextAnniversaryItem.textContent = `${now.getFullYear()-anniversaryYear} Year Anniversary: ${nextAnniversary.toLocaleDateString()}`;
+                    milestoneList.appendChild(nextAnniversaryItem);
+                } else {
+                    var nextAnniversary = new Date(now.getFullYear() + 1, anniversaryMonth, anniversaryDay);
+                    const nextAnniversaryItem = document.createElement("li");
+                    nextAnniversaryItem.textContent = `${now.getFullYear()-anniversaryYear+1} Year Anniversary: ${nextAnniversary.toLocaleDateString()}`;
+                    milestoneList.appendChild(nextAnniversaryItem);
+                }
+                    
+            }
         } else if(relationship.status === "pending" && relationship.user2 === user._id) {
             console.log('Pending relationship for user2');
             const requesterInfo = await getUserInfo(relationship.user1);
@@ -66,6 +116,26 @@ async function renderRelationshipInfo(user, relationship) {
         }
     } else {
         document.getElementById("noRelationshipContainer").classList.remove("hidden");
+    }
+}
+
+async function renderCheckinCard(user) {
+    const checkins = await fetchCheckins(user._id);
+    let todayCompleted = false;
+    checkins.forEach(checkin => {
+        const checkinDate = new Date(checkin.date);
+        const today = new Date();
+        if(checkinDate.toDateString() === today.toDateString()) {
+            todayCompleted = true;
+        }
+    });
+    document.querySelector("#checkin-status").textContent = todayCompleted ? "You have completed your check-in for today." : "You have not completed your check-in for today. Check in:";
+    if(todayCompleted) {
+        document.querySelector(".working").classList.add("hidden");
+        document.querySelector(".disabled").classList.remove("hidden");
+    } else {
+        document.querySelector(".working").classList.remove("hidden");
+        document.querySelector(".disabled").classList.add("hidden");
     }
 }
 

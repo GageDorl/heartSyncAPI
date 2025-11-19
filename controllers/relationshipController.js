@@ -1,5 +1,8 @@
 import Relationship from '../models/relationship.js';
 import User from '../models/user.js';
+import Activity from '../models/activity.js';
+import Letter from '../models/letter.js';
+import Checkin from '../models/checkin.js';
 
 export const getRelationship = async (req, res) => {
     try {
@@ -53,6 +56,9 @@ export const updateRelationship = async (req, res) => {
         const updateData = req.body;
         if(updateData.status =="blocked"){
             await Relationship.findOneAndDelete({ _id: relationshipId });
+            await Activity.deleteMany({ relationshipId: relationshipId });
+            await Letter.deleteMany({ relationshipId: relationshipId });
+            await Checkin.deleteMany({ relationshipId: relationshipId });
             res.status(200).json({ message: 'Relationship blocked and deleted successfully' });
         } else {
             const updatedRelationship = await Relationship.findOneAndUpdate(
