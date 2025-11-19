@@ -15,5 +15,8 @@ routes.use('/api/activities', activityRoutes);
 routes.use('/api/letters', letterRoutes);
 routes.use('/api/checkins', checkinRoutes);
 routes.use('/', authRoutes);
+routes.use('/:path', (req, res) => {
+    res.sendFile('404.html', { root: 'public' });
+});
 
 export default routes;

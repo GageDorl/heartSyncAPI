@@ -51,3 +51,21 @@ export async function getUserInfo(userID) {
         return null;
     }
 }
+
+export async function requestRelationship(user, partnerEmail) {
+    const response = await fetch('/api/relationships/request', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user1: user._id, user2Email: partnerEmail })
+    });
+
+    if (response.ok) {
+        const relationship = await response.json();
+        displayRelationship(user, relationship);
+    } else {
+        console.error(`Failed to send relationship request: ${JSON.stringify(await response.json())}`);
+        showNotification("Failed to send relationship request", true);
+    }
+}

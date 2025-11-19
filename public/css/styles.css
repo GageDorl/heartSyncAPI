@@ -135,6 +135,48 @@ header {
     display: none !important;
 }
 
+form{
+    display: flex;
+    flex-direction: column;
+    label{
+        font-weight: bold;
+    }
+    input, select, textarea{
+        padding: 10px;
+        border: 1px solid var(--accent-color);
+        border-radius: 5px;
+        font-size: 1rem;
+        font-family: inherit;
+        resize: vertical;
+        margin-bottom: 15px;
+    }
+}
+
+button{
+    background-color: var(--accent-color);
+    color: var(--light-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+    &:hover{
+        background-color: var(--primary-color);
+    }
+    &:active{
+        transform: scale(0.95);
+    }
+}
+
+.form-btns{
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    justify-content: flex-end !important;
+    margin-top: 20px;
+}
+
 @media screen and (min-width: 768px){
     header{
         flex-direction: row;

@@ -100,12 +100,3 @@
         }
     }
 }
-
-
-
-.form-btns{
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 10px !important;
-    justify-content: flex-end !important;
-}

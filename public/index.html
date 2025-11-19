@@ -8,8 +8,8 @@
     <title>HeartSync - Dashboard</title>
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">Gage & Rory</h1>
+    <div class="container hidden" id="relationshipContainer">
+        <h1 class="title"><span id="userName">Gage</span> & <span id="partnerName">Rory</span></h1>
         <div class="dashboard">
             <div class="card" id="activities-card">
                 <h2 class="card-title"><a href="/activities">Upcoming Activities</a></h2>
@@ -33,6 +33,31 @@
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="container hidden" id="pendingRelationshipContainer">
+        <h1 class="title">Welcome to HeartSync!</h1>
+        <div class="card">
+            <p>Your relationship request for <span id="pending-partner-name"></span>(<span id="pending-partner-email"></span>) is pending. Please wait for your partner to accept the request.</p>
+        </div>
+    </div>
+    <div class="container hidden" id="relationshipRequest">
+        <h1 class="title">Welcome to HeartSync!</h1>
+        <div class="card">
+            <p>You are not currently in a relationship but you have a pending request from <span id="requester-name"></span>(<span id="requester-email"></span>).</p>
+            <div class="form-btns">
+                <button id="accept-relationship-btn">Accept Request</button>
+                <button id="decline-relationship-btn">Decline Request</button>
+            </div>
+        </div>
+    </div>
+    <div class="container hidden" id="noRelationshipContainer">
+        <h1 class="title">Welcome to HeartSync!</h1>
+        <p>You are not currently in a relationship. To get started, please send a relationship request to your partner.</p>
+        <form id="request-relationship-form" class="card">
+            <label for="partner-email-input">Partner's Email:</label>
+            <input type="email" id="partner-email-input" name="partner-email-input" required>
+            <button type="submit" class="request-relationship-btn">Send Request</button>
+        </form>
     </div>
 </body>
 </html>

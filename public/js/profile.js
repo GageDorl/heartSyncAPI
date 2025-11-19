@@ -1,5 +1,5 @@
 import { renderHeader, showNotification } from "../partials/header";
-import { fetchRelationship, fetchCurrentUser, updateUser, getUserInfo } from "./fetch-data.mjs";
+import { fetchRelationship, fetchCurrentUser, updateUser, getUserInfo, requestRelationship } from "./fetch-data.mjs";
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -82,26 +82,6 @@ async function displayRelationship(user, relationship) {
             document.getElementById('incoming-request').setAttribute('data-relationship-id', relationship._id);
             document.getElementById('incoming-request').classList.remove('hidden');
         }
-    }
-}
-
-
-
-async function requestRelationship(user, partnerEmail) {
-    const response = await fetch('/api/relationships/request', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ user1: user._id, user2Email: partnerEmail })
-    });
-
-    if (response.ok) {
-        const relationship = await response.json();
-        displayRelationship(user, relationship);
-    } else {
-        console.error(`Failed to send relationship request: ${JSON.stringify(await response.json())}`);
-        showNotification("Failed to send relationship request", true);
     }
 }
 
