@@ -71,18 +71,18 @@ export async function requestRelationship(user, partnerEmail) {
     }
 }
 
-export async function respondToRequest(user, relationshipId, choice) {
+export async function respondToRequest(user, relationshipId, status) {
     const response = await fetch(`/api/relationships/${user._id}/${relationshipId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ status: choice })
+        body: JSON.stringify({ status })
     });
 
     if (response.ok) {
         const updatedRelationship = await response.json();
-        if(choice === 'blocked') {
+        if(status === 'blocked') {
             showNotification("Relationship request removed or blocked", false);
             return null;
         } else {
@@ -92,6 +92,25 @@ export async function respondToRequest(user, relationshipId, choice) {
     } else {
         console.error('Failed to respond to relationship request');
         showNotification("Failed to respond to relationship request", true);
+    }
+}
+
+export async function updateRelationship(user, relationshipId, updateData) {
+    const response = await fetch(`/api/relationships/${user._id}/${relationshipId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateData)
+    });
+
+    if (response.ok) {
+        const updatedRelationship = await response.json();
+        showNotification("Relationship updated successfully", false);
+        return updatedRelationship;
+    } else {
+        console.error('Failed to update relationship');
+        showNotification("Failed to update relationship", true);
     }
 }
 

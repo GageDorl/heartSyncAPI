@@ -15,6 +15,9 @@ const relationshipSchema = new mongoose.Schema({
         type: String,
         enum: ['pending', 'accepted', 'blocked'],
         default: 'pending'
+    },
+    anniversary: {
+        type: Date,
     }
 } , { timestamps: true });
 

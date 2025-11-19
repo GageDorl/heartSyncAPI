@@ -47,17 +47,17 @@ export const addRelationshipWithEmail = async (req, res) => {
     }
 };
 
-export const updateRelationshipStatus = async (req, res) => {
+export const updateRelationship = async (req, res) => {
     try {
         const { userId, relationshipId } = req.params;
-        const { status } = req.body;
-        if(status =="blocked"){
+        const updateData = req.body;
+        if(updateData.status =="blocked"){
             await Relationship.findOneAndDelete({ _id: relationshipId });
             res.status(200).json({ message: 'Relationship blocked and deleted successfully' });
         } else {
             const updatedRelationship = await Relationship.findOneAndUpdate(
                 { _id: relationshipId },
-                { status },
+                updateData,
                 { new: true }
             );
             if (!updatedRelationship) {

@@ -1,5 +1,5 @@
 import { renderHeader, showNotification } from "../partials/header";
-import { fetchRelationship, fetchCurrentUser, updateUser, getUserInfo, requestRelationship, respondToRequest } from "./fetch-data.mjs";
+import { fetchRelationship, fetchCurrentUser, updateUser, getUserInfo, requestRelationship, respondToRequest, updateRelationship } from "./fetch-data.mjs";
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const relationship = await fetchRelationship(user);
     renderProfileInfo(user);
     renderRelationshipInfo(user, relationship);
-    
+
 });
 
 
@@ -72,12 +72,30 @@ async function renderRelationshipInfo(user, relationship=null) {
     }
 }
 
+document.getElementById('anniversary-date').addEventListener('change', async (event) => {
+    const newDate = new Date(`${event.target.value}T12:00:00`);
+    console.log("New anniversary date selected:", newDate);
+    const user = await fetchCurrentUser();
+    const relationship = await fetchRelationship(user);
+    if(relationship && relationship.status === 'accepted') {
+        relationship.anniversary = newDate;
+        const updatedRelationship = await updateRelationship(user, relationship._id, { anniversary: newDate });
+        console.log("Updated anniversary date:", updatedRelationship);
+        renderRelationshipInfo(user, updatedRelationship);
+    }
+});
+
 async function displayRelationship(user, relationship) {
     const otherUser = await getUserInfo(relationship.user2 == user._id ? relationship.user1 : relationship.user2);
     if(relationship.status == 'accepted') {
         document.getElementById('relationship-status').textContent = 'You are in a relationship!';
         document.getElementById('partner-name').textContent = otherUser.name;
         document.getElementById('partner-email').textContent = otherUser.email;
+        let anniversary = relationship.anniversary ? new Date(relationship.anniversary) : null;
+        let anniversaryMonth = (anniversary.getMonth() + 1).toString().padStart(2, '0');
+        let anniversaryDay = anniversary.getDate().toString().padStart(2, '0');
+
+        document.getElementById('anniversary-date').value = anniversary ? `${anniversary.getFullYear()}-${anniversaryMonth}-${anniversaryDay}` : null;
         document.getElementById('partner-info').classList.remove('hidden');
     } else if(relationship.status == 'pending') {
         if(user._id == relationship.user1) {
