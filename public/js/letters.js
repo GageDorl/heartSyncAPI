@@ -37,6 +37,7 @@ const filterSelect = document.querySelector('.filter-group');
 filterSelect.addEventListener('change', async () => {
     document.querySelector('.letter-list').innerHTML = '';
     const filterValue = document.querySelector('input[name="filter"]:checked').value;
+    console.log("Filter changed to:", filterValue);
     const letters = await fetchLetters(document.querySelector('.letter-list').dataset.relationshipId);
     renderLetters(letters, filterValue);
 });
