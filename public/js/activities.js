@@ -74,7 +74,7 @@ function renderActivities(activities) {
                     title: addActivityForm.querySelector("#activity-title").value,
                     description: addActivityForm.querySelector("#activity-description").value,
                     category: addActivityForm.querySelector("#activity-category").value,
-                    date: addActivityForm.querySelector("#activity-date").value,
+                    date: new Date(`${addActivityForm.querySelector("#activity-date").value}T12:00:00`),
                     duration: addActivityForm.querySelector("#activity-duration").value,
                     status: addActivityForm.querySelector("#activity-status").value
                 };
@@ -108,7 +108,7 @@ activityForm.addEventListener("submit", async (e) => {
         title: activityForm.querySelector("#activity-title").value,
         description: activityForm.querySelector("#activity-description").value,
         category: activityForm.querySelector("#activity-category").value,
-        date: activityForm.querySelector("#activity-date").value,
+        date: new Date(`${activityForm.querySelector("#activity-date").value}T12:00:00`),
         duration: activityForm.querySelector("#activity-duration").value,
         status: activityForm.querySelector("#activity-status").value
     };

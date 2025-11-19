@@ -141,6 +141,8 @@ declineBtn.addEventListener('click', async () => {
 
 const removeBtn = document.getElementById('remove-relationship-btn');
 removeBtn.addEventListener('click', async () => {
+    const confirmRemoval = confirm("Are you sure you want to remove this relationship? This action cannot be undone.");
+    if(!confirmRemoval) return;
     const user = await fetchCurrentUser();
     const relationship = await fetchRelationship(user);
     const updatedRelationship = await respondToRequest(user, relationship._id, 'blocked');

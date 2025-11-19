@@ -103,4 +103,16 @@
 }
 #anniversary-date{
     margin:0;
+    padding:0;
+    border:none;
+    background-color: var(--light-color);
+}
+
+#user-info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: clamp(250px, 80%, 800px);
+    max-width: 100%;
+    margin: 0 auto;
 }
