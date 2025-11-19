@@ -39,6 +39,7 @@ function renderActivities(activities) {
         listItem.setAttribute("data-activity-id", activity._id);
         listItem.addEventListener("mousedown", (e) => {
             e.preventDefault();
+            if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")) return;
             listItem.classList.add("dragging");
             listItem.style.top = `calc(${e.clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
             listItem.style.left = `calc(${e.clientX}px - ${listItem.offsetWidth / 2}px)`;
@@ -84,6 +85,7 @@ function renderActivities(activities) {
         });
         listItem.addEventListener("touchstart", (e) => {
             e.preventDefault();
+            if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")) return;
             listItem.classList.add("dragging");
             listItem.style.top = `calc(${e.touches[0].clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
             listItem.style.left = `calc(${e.touches[0].clientX}px - ${listItem.offsetWidth / 2}px)`;
