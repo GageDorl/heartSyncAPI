@@ -1,6 +1,6 @@
 import express from 'express';
 const routes = express.Router();
-import { getUser, getCurrentUser, updateCurrentUser, createUser, updateUser, deleteUser } from '../controllers/userController.js';
+import { getUser, getCurrentUser, updateCurrentUser, createUser, updateUser, deleteUser, getAllUsers } from '../controllers/userController.js';
 import pkg from 'express-openid-connect';
 
 const { auth, requiresAuth } = pkg;
@@ -16,9 +16,10 @@ routes.use(auth(config));
 
 routes.get('/current', requiresAuth(), getCurrentUser);
 routes.put('/current', requiresAuth(), updateCurrentUser);
+routes.get('/', requiresAuth(), getAllUsers);
 routes.get('/:id', getUser);
 routes.post('/', requiresAuth(), createUser);
-routes.put('/:id', updateUser);
-routes.delete('/:id', deleteUser);
+routes.put('/:id', requiresAuth(), updateUser);
+routes.delete('/:id', requiresAuth(), deleteUser);
 
 export default routes;

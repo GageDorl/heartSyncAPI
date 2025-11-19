@@ -11,7 +11,9 @@
         flex-direction: column;
         gap: 20px;
         width: 250px;
-        min-height:250px;
+        min-height: 200px;
+        padding: 10px;
+        transition: background-color 0.3s ease;
         ul{
             list-style: none;
             padding-left: 0;
@@ -36,6 +38,11 @@
     position:absolute;
     top:0;
     left:0;
+}
+
+.droppable{
+    background-color: var(--highlight-color);
+    border-radius: 8px;
 }
 
 @media screen and (min-width: 900px){

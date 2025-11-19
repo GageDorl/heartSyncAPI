@@ -95,7 +95,8 @@ saveDraftBtn.addEventListener('click', async (e) => {
 async function saveLetterEvent(e) {
     e.preventDefault();
     let type;
-    if(e.target.classList.contains("send-letter-btn")){
+    console.log(e.target.classList);
+    if(e.target.classList.contains("new-letter-form")){
         type = "sent";
     } else {
         type = "draft";
@@ -117,5 +118,7 @@ async function saveLetterEvent(e) {
     modalContainer.classList.add('hidden');
     newLetterForm.reset();
     const letters = await fetchLetters(relationshipId);
+    console.log(type)
+    document.getElementById(type).checked = true;
     renderLetters(letters, type);
 }

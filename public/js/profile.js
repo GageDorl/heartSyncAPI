@@ -92,9 +92,10 @@ async function displayRelationship(user, relationship) {
         document.getElementById('partner-name').textContent = otherUser.name;
         document.getElementById('partner-email').textContent = otherUser.email;
         let anniversary = relationship.anniversary ? new Date(relationship.anniversary) : null;
-        let anniversaryMonth = (anniversary.getMonth() + 1).toString().padStart(2, '0');
-        let anniversaryDay = anniversary.getDate().toString().padStart(2, '0');
-
+        if(anniversary) {
+            let anniversaryMonth = (anniversary.getMonth() + 1).toString().padStart(2, '0');
+            let anniversaryDay = anniversary.getDate().toString().padStart(2, '0');
+        }
         document.getElementById('anniversary-date').value = anniversary ? `${anniversary.getFullYear()}-${anniversaryMonth}-${anniversaryDay}` : null;
         document.getElementById('partner-info').classList.remove('hidden');
     } else if(relationship.status == 'pending') {

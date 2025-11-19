@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
     timezone: {
         type: String,
         required: true,
