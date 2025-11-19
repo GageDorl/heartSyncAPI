@@ -38,11 +38,12 @@ function renderActivities(activities) {
         listItem.classList.add("activity-card");
         listItem.setAttribute("data-activity-id", activity._id);
         listItem.addEventListener("mousedown", (e) => {
+            e.preventDefault();
             listItem.classList.add("dragging");
-            listItem.style.top = `calc(${e.clientY}px - 10px)`;
+            listItem.style.top = `calc(${e.clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
             listItem.style.left = `calc(${e.clientX}px - ${listItem.offsetWidth / 2}px)`;
             const onMouseMove = (e) => {
-                listItem.style.top = `calc(${e.clientY}px - 10px)`;
+                listItem.style.top = `calc(${e.clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
                 listItem.style.left = `calc(${e.clientX}px - ${listItem.offsetWidth / 2}px)`;
             };
             const onMouseUp = () => {
@@ -82,13 +83,14 @@ function renderActivities(activities) {
             document.addEventListener("mouseup", onMouseUp);
         });
         listItem.addEventListener("touchstart", (e) => {
+            e.preventDefault();
             listItem.classList.add("dragging");
-            listItem.style.top = `calc(${e.touches[0].clientY}px - 10px)`;
+            listItem.style.top = `calc(${e.touches[0].clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
             listItem.style.left = `calc(${e.touches[0].clientX}px - ${listItem.offsetWidth / 2}px)`;
             document.body.style.touchAction = "none";
             const onTouchMove = (e) => {
 
-                listItem.style.top = `calc(${e.touches[0].clientY}px - 10px)`;
+                listItem.style.top = `calc(${e.touches[0].clientY}px + ${document.documentElement.scrollTop}px - 10px)`;
                 listItem.style.left = `calc(${e.touches[0].clientX}px - ${listItem.offsetWidth / 2}px)`;
             };
             const onTouchEnd = () => {
