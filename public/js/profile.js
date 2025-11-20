@@ -33,10 +33,10 @@ editButton.addEventListener('click', () => {
     editForm.classList.remove('hidden');
 });
 
-cancelButton.addEventListener('click', () => {
+cancelButton.addEventListener('click', async () => {
     editForm.classList.add('hidden');
     profileDetails.classList.remove('hidden');
-    const user = fetchCurrentUser();
+    const user = await fetchCurrentUser();
     renderProfileInfo(user);
 });
 

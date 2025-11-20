@@ -15,21 +15,12 @@
     height: 100px;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    cursor: pointer;
-    font-size: 1rem;
     transition: 0.3s ease;
+    margin:10px;
     &.disabled{
         background-color: var(--accent-color);
         color: var(--light-color);
-        border-color: var(--highlight-color);
         cursor: not-allowed;
-        &:hover{
-            background-color: var(--highlight-color);
-            color: var(--light-color);
-        }
-        &:active{
-            transform: scale(1);
-        }
     }
     &:hover{
         background-color: var(--accent-color);

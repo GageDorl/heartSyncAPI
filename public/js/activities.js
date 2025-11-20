@@ -55,7 +55,9 @@ function renderActivities(activities) {
         listItem.addEventListener("mousedown", (e) => {
             if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")) return;
             e.preventDefault();
+            const itemWidth = listItem.offsetWidth;
             listItem.classList.add("dragging");
+            listItem.style.width = `${itemWidth}px`;
             plannedActivities.classList.add("droppable");
             ideas.classList.add("droppable");
             completedActivities.classList.add("droppable");
@@ -83,6 +85,7 @@ function renderActivities(activities) {
                 listItem.classList.remove("dragging");
                 listItem.style.top = ``;
                 listItem.style.left = ``;
+                listItem.style.width = ``;
                 plannedActivities.classList.remove("droppable");
                 ideas.classList.remove("droppable");
                 completedActivities.classList.remove("droppable");
@@ -94,6 +97,8 @@ function renderActivities(activities) {
         listItem.addEventListener("touchstart", (e) => {
             if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")) return;
             e.preventDefault();
+            const itemWidth = listItem.offsetWidth;
+            listItem.style.width = `${itemWidth}px`;
             listItem.classList.add("dragging");
             plannedActivities.classList.add("droppable");
             ideas.classList.add("droppable");
@@ -123,6 +128,7 @@ function renderActivities(activities) {
                 
                 listItem.style.top = ``;
                 listItem.style.left = ``;
+                listItem.style.width = ``;
                 listItem.classList.remove("dragging");
                 plannedActivities.classList.remove("droppable");
                 ideas.classList.remove("droppable");

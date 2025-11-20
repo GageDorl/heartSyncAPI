@@ -10,51 +10,57 @@
 <body>
     <div class="container">
         <h1 class="title">Your Profile</h1>
-        <div class="profile-info">
+        <div class="profile-info card">
             <div class="profile-display">
-                <h2>Profile Details</h2>
+                <h2 class="card-title">Profile Details</h2>
                 <div id="user-info">
                     <p class="profile-item"><strong>Name:</strong> <span id="user-name"></span></p>
                     <p class="profile-item"><strong>Timezone:</strong> <span id="user-timezone"></span></p>
                     <p class="profile-item"><strong>Email:</strong> <span id="user-email"></span></p>
                     <p class="profile-item"><strong>User ID:</strong> <span id="user-id"></span></p>
-                    <button id="edit-profile-btn">Edit Profile</button>
+                    <div class="form-btns">
+                        <button id="edit-profile-btn">Edit Profile</button>
+                        <button id="logout" onclick="window.location.href='./logout'">Logout</button>
+                    </div>
                 </div>
             </div>
             <form id="edit-profile" class="hidden">
-                <h2>Edit Profile</h2>
+                <h2 class="card-title">Edit Profile</h2>
+                <div id="edit-user-info">
                 <label for="edit-name">Name:</label>
-                <input type="text" id="edit-name" name="edit-name" required>
-                
-                <label for="edit-timezone">Timezone:</label>
-                <select id="edit-timezone" name="edit-timezone" required>
-                    <option value="EST">EST</option>
-                    <option value="CST">CST</option>
-                    <option value="MST">MST</option>
-                    <option value="PST">PST</option>
-                    <option value="GMT">GMT</option>
-                    <option value="CET">CET</option>
-                    <option value="IST">IST</option>
-                    <option value="JST">JST</option>
-                    <option value="AEST">AEST</option>
-                    <option value="ACST">ACST</option>
-                    <option value="AWST">AWST</option>
-                    <option value="Other">Other</option>
-                </select>
-                <div class="form-btns">
-                    <button type="submit" class="save-profile-btn">Save Changes</button>
-                    <button type="button" class="cancel-edit-btn">Cancel</button>
+                    <input type="text" id="edit-name" name="edit-name" required>
+                    
+                    <label for="edit-timezone">Timezone:</label>
+                    <select id="edit-timezone" name="edit-timezone" required>
+                        <option value="EST">EST</option>
+                        <option value="CST">CST</option>
+                        <option value="MST">MST</option>
+                        <option value="PST">PST</option>
+                        <option value="GMT">GMT</option>
+                        <option value="CET">CET</option>
+                        <option value="IST">IST</option>
+                        <option value="JST">JST</option>
+                        <option value="AEST">AEST</option>
+                        <option value="ACST">ACST</option>
+                        <option value="AWST">AWST</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="form-btns">
+                        <button type="submit" class="save-profile-btn">Save Changes</button>
+                        <button type="button" class="cancel-edit-btn">Cancel</button>
+                    </div>
                 </div>
             </form>
             <div class="relationship-info profile-display">
-                <h2>Relationship Details</h2>
+                <h2 class="card-title">Relationship Details</h2>
                 <p id="relationship-status-container" class="profile-item"><strong>Status:</strong> <span id="relationship-status"></span></p>
                 <div id="partner-info" class="hidden">
                     <p class="profile-item"><strong>Partner Name:</strong> <span id="partner-name"></span></p>
                     <p class="profile-item"><strong>Partner Email:</strong> <span id="partner-email"></span></p>
                     <p class="profile-item" id="anniversary"><strong>Anniversary:</strong> <input type="date" id="anniversary-date"></p>
-                    
-                    <button id="remove-relationship-btn">Remove Relationship</button>
+                    <div class="form-btns">
+                        <button id="remove-relationship-btn">Remove Relationship</button>
+                    </div>
                 </div>
                 <div id="no-relationship">
                     <form id="request-relationship-form" class="hidden">
