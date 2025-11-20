@@ -23,7 +23,10 @@ export function renderHeader() {
     document.querySelector('.mobile-menu-toggle').addEventListener('click', () => {
         document.querySelector('nav').classList.toggle('open');
     });
-
+    let link = document.createElement('link');
+    link.rel = 'icon';
+    link.href = '/images/heart-icon.png';
+    document.head.appendChild(link);
 }
 
 export function showNotification(message, isError = false) {
