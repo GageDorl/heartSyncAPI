@@ -25,7 +25,7 @@ export function renderHeader() {
     });
     let link = document.createElement('link');
     link.rel = 'icon';
-    link.href = '/images/heart-icon.png';
+    link.href = '/images/heart-logo.svg';
     document.head.appendChild(link);
 }
 
