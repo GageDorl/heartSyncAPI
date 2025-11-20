@@ -10,7 +10,7 @@ const config = {
     secret: process.env.SECRET,
     baseURL: process.env.BASE_URL,
     clientID: process.env.CLIENT_ID,
-    issuerBaseURL: "https://dev-5fw5sq1d53v0445x.us.auth0.com"
+    issuerBaseURL: process.env.ISSUER_BASE_URL
 };
 routes.use(auth(config));
 
