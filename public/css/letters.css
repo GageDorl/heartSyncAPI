@@ -3,6 +3,8 @@
 .letters-board{
     display: flex;
     flex-direction: column;
+    
+    width: clamp(250px, 80%, 800px);
     radio-group{
         display: flex;
         flex-direction: row;

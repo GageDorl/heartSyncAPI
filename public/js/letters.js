@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         showNotification("You need an accepted relationship to view letters.", true);
         return;
     }
-    document.querySelector('.letter-list').setAttribute('data-relationship-id', relationship._id);
+    document.querySelector('.letter-container').setAttribute('data-relationship-id', relationship._id);
     const letters = await fetchLetters(relationship._id);
     let filterValue = document.querySelector('input[name="filter"]:checked').value;
     renderLetters(letters, filterValue);
@@ -35,21 +35,17 @@ modalContainer.addEventListener('click', (e) => {
 
 const filterSelect = document.querySelector('.filter-group');
 filterSelect.addEventListener('change', async () => {
-    document.querySelector('.letter-list').innerHTML = '';
+    document.querySelector('.letter-container').innerHTML = '<li class="letter-item"><a>Loading...</a></li>';
     const filterValue = document.querySelector('input[name="filter"]:checked').value;
     console.log("Filter changed to:", filterValue);
-    const letters = await fetchLetters(document.querySelector('.letter-list').dataset.relationshipId);
+    const letters = await fetchLetters(document.querySelector('.letter-container').dataset.relationshipId);
     renderLetters(letters, filterValue);
 });
 
 async function renderLetters(letters, filter) {
     const user = await fetchCurrentUser();
-    const lettersList = document.querySelector('.letter-list');
-    const letterHeaders = document.createElement('li');
-    letterHeaders.classList.add('letter-headers');
-    letterHeaders.innerHTML = `
-                    <span class="letter-title-header">Title</span>
-                    <span class="letter-date-header">Date</span>`;
+    const lettersList = document.querySelector('.letter-container');
+    console.log(lettersList);
     lettersList.innerHTML = '';
     let filteredLetters = [];
     switch (filter) {
@@ -78,7 +74,6 @@ async function renderLetters(letters, filter) {
             lettersList.appendChild(letterItem);
         });
     }
-    lettersList.prepend(letterHeaders);
 }
 
 const newLetterForm = document.querySelector('.new-letter-form');
