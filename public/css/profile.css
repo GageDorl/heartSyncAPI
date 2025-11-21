@@ -1,6 +1,16 @@
 @import './styles.css';
 
+
+
 .profile-info{
+    #profile-icon{
+        width: clamp(4rem, 15vw, 6rem);
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+        margin-bottom: 15px;
+        align-self: center;
+        border: 5px solid var(--accent-color);
+    }
     display: flex;
     flex-direction: column;
     padding: 20px 35px;

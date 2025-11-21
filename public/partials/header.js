@@ -7,11 +7,11 @@ const header = `
     <nav>
         <ul>
             <li><a href="/">Dashboard</a></li>
-            <li><a href="/profile">Profile</a></li>
             <li><a href="/activities">Activities</a></li>
             <li><a href="/letters">Letters</a></li>
             <li><a href="/checkins">Check-ins</a></li>
             <li><a href="/stats">Stats</a></li>
+            <li><a href="/profile"><img id="profile-icon" src="/images/profile-pic" alt="Profile Icon"></a></li>
         </ul>
     </nav>
 </header>
@@ -22,6 +22,14 @@ export function renderHeader() {
     document.body.insertAdjacentHTML('afterbegin', header);
     document.querySelector('.mobile-menu-toggle').addEventListener('click', () => {
         document.querySelector('nav').classList.toggle('open');
+    });
+    let path = window.location.pathname;
+    console.log("Current path:", path);
+    let navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') == path) {
+            link.classList.add('active');
+        }
     });
     let link = document.createElement('link');
     link.rel = 'icon';
