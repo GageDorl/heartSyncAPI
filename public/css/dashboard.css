@@ -12,6 +12,7 @@
     background-color: var(--light-color);
     color: var(--accent-color);
     border: 5px solid var(--accent-color);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
     height: 100px;
     aspect-ratio: 1/1;
     border-radius: 50%;
@@ -33,6 +34,10 @@
 
 #milestones{
     flex-grow: 2;
+}
+
+#activities-card, #checkin-card{
+    flex-grow:1;
 }
 
 #request-relationship-form{

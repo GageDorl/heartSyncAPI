@@ -14,6 +14,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderActivities(activities);
 });
 
+const addActivityBtn = document.querySelector('.add-button');
+const modalContainer = document.querySelector('.modal-container');
+
+addActivityBtn.addEventListener('click', () => {
+    modalContainer.classList.remove('hidden');
+});
+
+modalContainer.addEventListener('click', (e) => {
+    if (e.target === modalContainer) {
+        modalContainer.classList.add('hidden');
+    }
+});
+
 function renderActivities(activities) {
     const plannedActivitiesList = document.querySelector("#planned-activities .activity-list");
     const ideasList = document.querySelector("#activity-ideas .activity-list");
@@ -26,16 +39,16 @@ function renderActivities(activities) {
         const formattedCategory = activity.category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         listItem.innerHTML = `
         <span class="close-btn">&times;</span>
-        <strong>${activity.title}</strong>
-        <p>${formattedCategory}</p>
-        <p>${new Date(activity.date).toLocaleDateString()}</p>
-        <p>${activity.duration} minutes</p>
-        <p>${activity.description}</p>
+        <p class="activity-title">${activity.title}</p>
+        <p class="activity-category">Category: ${formattedCategory}</p>
+        <p class="activity-date">${new Date(activity.date).toLocaleDateString()}</p>
+        <p class="activity-duration">${activity.duration} minutes</p>
+        <p class="activity-description">${activity.description}</p>
         <div class="form-btns">
             <button class="edit-activity-btn">Edit</button>
         </div>
         `;
-        listItem.classList.add("activity-card");
+        listItem.classList.add("activity-card", "card");
         listItem.setAttribute("data-activity-id", activity._id);
         const isOverlapping = (elem, otherElem) => {
             let elemRect = elem.getBoundingClientRect();
@@ -95,7 +108,7 @@ function renderActivities(activities) {
             document.addEventListener("mouseup", onMouseUp);
         });
         listItem.addEventListener("touchstart", (e) => {
-            if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")) return;
+            if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")||e.target.classList.contains("activity-description")) return;
             e.preventDefault();
             const itemWidth = listItem.offsetWidth;
             listItem.style.width = `${itemWidth}px`;
@@ -155,6 +168,7 @@ function renderActivities(activities) {
             addActivityForm.querySelector("#activity-status").value = activity.status;
             const addButton = document.querySelector("#add-activity-btn");
             addButton.textContent = "Update Activity";
+            modalContainer.classList.remove('hidden');
             window.scrollTo({ top: document.querySelector(".add-activity-form").offsetTop, behavior: 'smooth' });
             addButton.onclick = async (e) => {
                 e.preventDefault();
@@ -169,6 +183,7 @@ function renderActivities(activities) {
                 await updateActivity(activity, updatedActivity);
                 renderActivities(await fetchActivities(activity.relationshipId));
                 window.scrollTo({ top: document.querySelector(`[data-activity-id="${activity._id}"]`).offsetTop - 100, behavior: 'smooth' });
+                modalContainer.classList.add('hidden');
                 addActivityForm.reset();
                 addButton.textContent = "Add Activity";
                 addButton.onclick = null;

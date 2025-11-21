@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderLetters(letters, filterValue);
 });
 
-const writeLetterBtn = document.querySelector('.write-letter');
-const modalContainer = document.querySelector('.new-letter-modal-container');
+const writeLetterBtn = document.querySelector('.add-button');
+const modalContainer = document.querySelector('.modal-container');
 const closeModalBtn = document.querySelector('.close-modal-btn');
 
 writeLetterBtn.addEventListener('click', () => {

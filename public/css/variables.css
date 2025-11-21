@@ -1,9 +1,21 @@
 :root{
-    --primary-color: #920049;
-    --secondary-color: #ffb3cc;
-    --accent-color: #ff1944;
-    --link-color: #9000b4;
-    --light-color: #fdced7;
-    --highlight-color: #ffbcd6;
-    --error-color: #e66b00;
+    --base-hue: 343;
+    --middle-tone: 70%;
+    --dark-tone: calc(var(--middle-tone) - 5%);
+    --light-tone: calc(var(--middle-tone) + 7%);
+    --lighter-tone: calc(var(--middle-tone) + 20%);
+    --accent-tone: calc(var(--middle-tone) + 10%);
+    --accent-dark-tone: calc(var(--middle-tone) + 7%);
+    --primary-color: hsl(var(--base-hue) 100% 40%);
+    /* --secondary-color: #fcafc9;
+    --secondary-dark-color: #e07599; */
+    --accent-color: hsl(var(--base-hue), 100%, var(--accent-tone));
+    --accent-dark-color: hsl(var(--base-hue), 100%, var(--accent-dark-tone));
+    /* --link-color: #9000b4; */
+    --light-color: white;
+    --bg-dark-color: hsl(var(--base-hue), 100%, var(--dark-tone));
+    --bg-color: hsl(var(--base-hue), 100%, var(--middle-tone));
+    --bg-light-color: hsl(var(--base-hue), 100%, var(--light-tone));
+    --highlight-color: hsl(var(--base-hue), 100%, var(--lighter-tone));
+    --error-color: hsl(15, 100%, 60%);
 }

@@ -4,16 +4,16 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 10px;
     justify-content: center;
     .section{
         display: flex;
         flex-direction: column;
         gap: 20px;
-        width: 250px;
         min-height: 200px;
-        padding: 10px;
+        min-width: 330px;
         transition: background-color 0.3s ease;
+        padding: 15px;
         ul{
             list-style: none;
             padding-left: 0;
@@ -24,11 +24,25 @@
                 a{
                     color: inherit;
                 }
-                background-color: var(--secondary-color);
                 border-radius: 8px;
                 padding: 25px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                max-width: 250px;
+                width: 300px;
+                .activity-title{
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                }
+                .activity-date, .activity-duration, .activity-category{
+                    font-size: 0.8rem;
+                    line-height: 1rem;
+                    /* padding-left: 10px; */
+                }
+                .activity-description{
+                    margin-top: 10px;
+                    line-height: 1.1rem;
+                    background-color: var(--bg-light-color);
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                }
             }
         }
     }
@@ -41,11 +55,11 @@
 }
 
 .droppable{
-    background-color: var(--highlight-color);
+    background-color: var(--bg-light-color);
     border-radius: 8px;
 }
 
-@media screen and (min-width: 900px){
+@media screen and (min-width: 1000px){
     .activities-board{
         flex-wrap:nowrap;
     }

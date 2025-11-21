@@ -11,7 +11,7 @@ const header = `
             <li><a href="/letters">Letters</a></li>
             <li><a href="/checkins">Check-ins</a></li>
             <li><a href="/stats">Stats</a></li>
-            <li><a href="/profile"><img id="profile-icon" src="/images/profile-pic" alt="Profile Icon"></a></li>
+            <li><a href="/profile">Profile</a></li>
         </ul>
     </nav>
 </header>

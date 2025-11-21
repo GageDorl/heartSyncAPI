@@ -20,8 +20,8 @@
         label{
             padding: 8px 12px;
             border-radius: 5px 5px 0 0;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
+            background-color: var(--bg-color);
+            color: var(--light-color);
             cursor: pointer;
             user-select: none;
             transition: 0.3s ease;
@@ -45,7 +45,7 @@
         .letter-item a{
             display: flex;
             flex-direction: row;
-            background-color: var(--secondary-color);
+            background-color: var(--highlight-color);
             justify-content: space-between;
             padding: 8px 10px;
             border-bottom: 1px solid var(--accent-color);
@@ -55,51 +55,6 @@
             &:last-of-type{
                 border-bottom: none;
             }
-        }
-    }
-}
-
-.write-letter{
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: var(--accent-color);
-    color: var(--light-color);
-    border: none;
-    padding: 15px 20px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: 0.3s ease;
-    &:hover{
-        background-color: var(--primary-color);
-    }
-    &:active{
-        transform: scale(0.95);
-    }
-}
-
-.new-letter-modal-container{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-    .new-letter-modal{
-        background-color: var(--secondary-color);
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: clamp(350px, 50vw, 700px);
-        .modal-title{
-            font-size: 1.5rem;
-            margin-bottom: 10px;
         }
     }
 }
