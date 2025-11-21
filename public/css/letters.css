@@ -45,11 +45,11 @@
         .letter-item a{
             display: flex;
             flex-direction: row;
+            color: var(--dark-color);
             background-color: var(--highlight-color);
             justify-content: space-between;
             padding: 8px 10px;
             border-bottom: 1px solid var(--accent-color);
-            color: inherit;
             text-decoration: none;
             flex-grow: 1;
             &:last-of-type{
