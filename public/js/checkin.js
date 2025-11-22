@@ -17,7 +17,7 @@ const renderCheckins = async (user, partnerInfo, pageNumber = 1) => {
     const checkins = await fetchCheckins(user._id);
     let todayCompleted = false;
     checkins.forEach(checkin => {
-        const checkinDate = new Date(checkin.date);
+        const checkinDate = new Date(checkin.createdAt);
         const today = new Date();
         if(checkinDate.toDateString() === today.toDateString()) {
             todayCompleted = true;
