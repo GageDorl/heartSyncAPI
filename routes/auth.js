@@ -70,6 +70,10 @@ routes.get('/new-user', requiresAuth(), (req, res) => {
     res.sendFile(path.join(__dirname, '../public/new-user.html'));
 });
 
+routes.get('/stats', requiresAuth(), (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/stats.html'));
+});
+
 routes.get('/login', (req, res) => {
     res.oidc.login();
 });

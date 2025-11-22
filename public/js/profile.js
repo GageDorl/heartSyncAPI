@@ -11,8 +11,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderHeader();
     const user = await fetchCurrentUser();
     const relationship = await fetchRelationship(user);
+
     renderProfileInfo(user);
     renderRelationshipInfo(user, relationship);
+    document.querySelector('.loading').classList.add('hidden');
+    document.querySelector('.profile-info').classList.remove('hidden');
+    document.querySelector('.relationship-info').classList.remove('hidden');
     
 });
 

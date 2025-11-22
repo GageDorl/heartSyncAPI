@@ -16,7 +16,14 @@
             <div id="todayStatus"></div>
             <form action="submitCheckin" class="checkInForm card hidden">
                 <label for="mood">Mood:</label>
-                <input type="text" id="mood" name="mood" required>
+                <select id="mood" name="mood" required>
+                    <option value="Happy">Happy</option>
+                    <option value="Sad">Sad</option>
+                    <option value="Neutral">Neutral</option>
+                    <option value="Excited">Excited</option>
+                    <option value="Anxious">Anxious</option>
+                    <option value="Angry">Angry</option>
+                </select>
                 <label for="closeness">Closeness Level (1-10):</label>
                 <select id="closeness" name="closeness" required>
                     <option value="1">1</option>

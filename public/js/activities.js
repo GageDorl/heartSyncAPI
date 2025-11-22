@@ -24,6 +24,8 @@ addActivityBtn.addEventListener('click', () => {
 modalContainer.addEventListener('click', (e) => {
     if (e.target === modalContainer) {
         modalContainer.classList.add('hidden');
+        const addActivityForm = document.querySelector(".add-activity-form");
+        addActivityForm.reset();
     }
 });
 
@@ -45,6 +47,7 @@ function renderActivities(activities) {
         <p class="activity-duration">${activity.duration} minutes</p>
         <p class="activity-description">${activity.description}</p>
         <div class="form-btns">
+            ${activity.status === "planned" || activity.status === "idea" ? `<button class="cancel-activity-btn">Cancel</button>` : ''}
             <button class="edit-activity-btn">Edit</button>
         </div>
         `;
@@ -66,7 +69,7 @@ function renderActivities(activities) {
         const ideas = document.getElementById("activity-ideas");
         const completedActivities = document.getElementById("completed-activities");
         listItem.addEventListener("mousedown", (e) => {
-            if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")) return;
+            if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn") || e.target.classList.contains("cancel-activity-btn")) return;
             e.preventDefault();
             const itemWidth = listItem.offsetWidth;
             listItem.classList.add("dragging");
@@ -108,7 +111,7 @@ function renderActivities(activities) {
             document.addEventListener("mouseup", onMouseUp);
         });
         listItem.addEventListener("touchstart", (e) => {
-            if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")||e.target.classList.contains("activity-description")) return;
+            if(e.target.classList.contains("close-btn") || e.target.classList.contains("edit-activity-btn")||e.target.classList.contains("cancel-activity-btn") || e.target.classList.contains("activity-description")) return;
             e.preventDefault();
             const itemWidth = listItem.offsetWidth;
             listItem.style.width = `${itemWidth}px`;
@@ -189,6 +192,15 @@ function renderActivities(activities) {
                 addButton.onclick = null;
             };
         });
+
+        const cancelBtn = listItem.querySelector(".cancel-activity-btn");
+        if (cancelBtn) {
+            cancelBtn.addEventListener("click", async () => {
+                const status = "cancelled";
+                await updateActivity(activity, { status });
+                renderActivities(await fetchActivities(activity.relationshipId));;
+            });
+        }
 
         if(activity.status === "planned") {
             plannedActivitiesList.appendChild(listItem);

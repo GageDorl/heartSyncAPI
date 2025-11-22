@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="/js/stats.js"></script>
+    <link rel="stylesheet" href="/css/stats.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <title>HeartSync - Stats</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">YourStats</h1>
+        <div class="form-btns">
+            <select id="timeframe">
+                <option value="wtd">Week to Date</option>
+                <option value="mtd">Month to Date</option>
+                <option value="3mth">Last 3 Months</option>
+                <option value="custom">Custom Range</option>
+            </select>
+            <div class="custom-date-inputs hidden" id="custom-date-range">
+                <input type="date" id="start-date">
+                <input type="date" id="end-date">
+                <button id="apply-date-range-btn">Apply</button>
+            </div>
+        </div>
+        <div class="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading<span class="loading-dots">.</span><span class="loading-dots">.</span><span class="loading-dots">.</span></div>
+        </div>
+        <div class="stats-display hidden" id="stats-display">
+            <div class="mini-stats">
+                <div class="card" id="streak">
+                    <div class="title">Current Streak:</div>
+                    <div class="stat" id="streak-value"></div>
+                </div>
+                <div class="card" id="primary-mood">
+                    <div class="title">Primary Mood:</div>
+                    <div class="stat" id="primary-mood-value"></div>
+                </div>
+                <div class="card" id="avg-closeness">
+                    <div class="title">Average Closeness:</div>
+                    <div class="stat" id="avg-closeness-value"></div>
+                </div>
+                <div class="card" id="activity-count">
+                    <div class="title">Activity Count:</div>
+                    <div class="stat" id="activity-count-value"></div>
+                </div>
+            </div>
+            <div class="card main-graphs">
+                <div id="closeness-graph" class="graph">
+                    <div class="title">Closeness Over Time</div>
+                    <div class="chart-holder">
+                        <canvas id="closenessChart"></canvas>
+                    </div>
+                </div>
+                <div id="mood-graph" class="graph">
+                    <div class="title">Mood Over Time</div>
+                    <div class="chart-holder">
+                        <canvas id="moodChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+    </div>
+</body>
+</html>
