@@ -74,7 +74,7 @@ const renderCheckins = async (user, partnerInfo, pageNumber = 1) => {
         const listItem = document.createElement("li");
         listItem.classList.add("checkin-card");
         listItem.innerHTML = `
-            <strong class="checkin-date">${new Date(checkin.date).toLocaleDateString()}</strong>
+            <strong class="checkin-date">${new Date(checkin.createdAt).toLocaleDateString()}</strong>
             <p class="checkin-mood">Mood: ${checkin.mood}</p>
             <p class="checkin-closeness">Closeness: ${checkin.closenessLevel}/10</p>
             <p class="checkin-notes">Notes: ${checkin.notes}</p>
