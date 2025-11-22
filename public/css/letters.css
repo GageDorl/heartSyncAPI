@@ -71,10 +71,9 @@
 }
 
 .letter{
+    width: clamp(250px, 80%, 800px);
     margin-top: 20px;
-    font-size: clamp(.8rem, 2.5vw, 1.1rem);
     .letter-title{
-        font-size: clamp(1.2rem, 5vw, 2rem);
         margin-top: 30px;
         margin-bottom: 10px;
     }
