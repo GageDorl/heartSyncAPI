@@ -31,6 +31,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
+    },
+    baseHue: {
+        type: String,
+        default: '343',
+    },
+    baseLightness: {
+        type: String,
+        default: '70',
     }
 }, { timestamps: true });
 

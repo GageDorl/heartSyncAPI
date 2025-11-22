@@ -59,6 +59,12 @@
     }
 }
 
+.dark-text{
+    .letter-item a{
+        color: var(--light-color) !important;
+    }
+}
+
 .back-to-letters-btn{
     width: fit-content;
     align-self: flex-start;

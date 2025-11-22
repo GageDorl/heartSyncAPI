@@ -1,3 +1,5 @@
+import { fetchCurrentUser } from '../js/fetch-data.mjs';
+
 const header = `
 <header>
     <div class="header-content">
@@ -18,7 +20,16 @@ const header = `
 <div id="notification" class="notification hidden"></div>
 `;
 
-export function renderHeader() {
+export async function renderHeader() {
+    const user = await fetchCurrentUser();
+    const rootStyles = getComputedStyle(document.documentElement);
+    const rootElement = document.documentElement;
+    rootElement.style.setProperty('--base-hue', user.baseHue || '343');
+    rootElement.style.setProperty('--middle-tone', (user.baseLightness || '70') + '%');
+    if (user.baseLightness<=50) {
+        rootElement.style.setProperty('--text-color', '#ffffff');
+        rootElement.classList.add('dark-text');
+    }
     document.body.insertAdjacentHTML('afterbegin', header);
     document.querySelector('.mobile-menu-toggle').addEventListener('click', () => {
         document.querySelector('nav').classList.toggle('open');

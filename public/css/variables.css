@@ -1,6 +1,6 @@
 :root{
     --base-hue: 343;
-    --middle-tone: 70%;
+    --middle-tone: 0%;
     --dark-tone: calc(var(--middle-tone) - 5%);
     --light-tone: calc(var(--middle-tone) + 7%);
     --lighter-tone: calc(var(--middle-tone) + 20%);
@@ -8,11 +8,8 @@
     --darker-tone: calc(var(--middle-tone) - 30%);
     --accent-dark-tone: calc(var(--accent-tone) - 5%);
     --primary-color: hsl(var(--base-hue) 100% 40%);
-    /* --secondary-color: #fcafc9;
-    --secondary-dark-color: #e07599; */
     --accent-color: hsl(var(--base-hue), 100%, var(--accent-tone));
     --accent-dark-color: hsl(var(--base-hue), 100%, var(--accent-dark-tone));
-    /* --link-color: #9000b4; */
     --light-color: white;
     --bg-dark-color: hsl(var(--base-hue), 100%, var(--dark-tone));
     --bg-color: hsl(var(--base-hue), 100%, var(--middle-tone));

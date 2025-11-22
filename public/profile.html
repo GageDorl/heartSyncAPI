@@ -19,6 +19,9 @@
                     <p class="profile-item"><strong>Timezone:</strong> <span id="user-timezone"></span></p>
                     <p class="profile-item"><strong>Email:</strong> <span id="user-email"></span></p>
                     <p class="profile-item"><strong>User ID:</strong> <span id="user-id"></span></p>
+                    <p class="profile-item"><strong>Base Hue:</strong> <span id="user-base-hue"></span></p>
+                    <p class="profile-item"><strong>Base Lightness:</strong> <span id="user-base-lightness"></span></p>
+                    <div class="color-sample"></div>
                     <div class="form-btns">
                         <button id="edit-profile-btn">Edit Profile</button>
                         <button id="logout" onclick="window.location.href='./logout'">Logout</button>
@@ -46,6 +49,11 @@
                         <option value="AWST">AWST</option>
                         <option value="Other">Other</option>
                     </select>
+                    <label for="edit-base-hue">Base Hue (0-360):</label>
+                    <input type="range" id="edit-base-hue" name="edit-base-hue" min="0" max="360" required>
+                    <label for="edit-base-lightness">Base Lightness (0-100):</label>
+                    <input type="range" id="edit-base-lightness" name="edit-base-lightness" min="0" max="100" required>
+                    <div class="color-sample"></div>
                     <div class="form-btns">
                         <button type="submit" class="save-profile-btn">Save Changes</button>
                         <button type="button" class="cancel-edit-btn">Cancel</button>

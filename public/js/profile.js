@@ -2,13 +2,18 @@ import { renderHeader, showNotification } from "../partials/header";
 import { fetchRelationship, fetchCurrentUser, updateUser, getUserInfo, requestRelationship, respondToRequest, updateRelationship } from "./fetch-data.mjs";
 
 
+const editBaseHueInput = document.getElementById('edit-base-hue');
+const editBaseLightnessInput = document.getElementById('edit-base-lightness');
+const colorSampleDiv = document.querySelectorAll('.color-sample');
+
+
 document.addEventListener("DOMContentLoaded", async () => {
     renderHeader();
     const user = await fetchCurrentUser();
     const relationship = await fetchRelationship(user);
     renderProfileInfo(user);
     renderRelationshipInfo(user, relationship);
-
+    
 });
 
 
@@ -17,9 +22,13 @@ async function renderProfileInfo(user) {
     document.getElementById('user-timezone').textContent = user.timezone;
     document.getElementById('user-email').textContent = user.email;
     document.getElementById('user-id').textContent = user._id;
+    document.getElementById('user-base-hue').textContent = user.baseHue ? user.baseHue.trim() : '343';
+    document.getElementById('user-base-lightness').textContent = user.baseLightness ? user.baseLightness.trim() : '70';
 
     document.getElementById('edit-name').value = user.name;
     document.getElementById('edit-timezone').value = user.timezone;
+    document.getElementById('edit-base-hue').value = user.baseHue ? user.baseHue.trim() : '343';
+    document.getElementById('edit-base-lightness').value = user.baseLightness ? user.baseLightness.trim() : '70';
     return user;
 }
 
@@ -44,9 +53,12 @@ saveButton.addEventListener('click', async (event) => {
     event.preventDefault();
     const name = document.getElementById('edit-name').value;
     const timezone = document.getElementById('edit-timezone').value;
-
-    const response = await updateUser({ name, timezone });
-
+    const baseHue = document.getElementById('edit-base-hue').value;
+    const baseLightness = document.getElementById('edit-base-lightness').value;
+    const response = await updateUser({ name, timezone, baseHue, baseLightness });
+    const rootElement = document.documentElement;
+    rootElement.style.setProperty('--base-hue', baseHue || '343');
+    rootElement.style.setProperty('--middle-tone', (baseLightness || '70') + '%');
     if (response.ok) {
         editForm.classList.add('hidden');
         profileDetails.classList.remove('hidden');
@@ -117,6 +129,21 @@ requestForm.addEventListener('submit', async (event) => {
     const user = await fetchCurrentUser();
     const relationship = await requestRelationship(user, partnerEmail);
     renderRelationshipInfo(user, relationship);
+});
+
+editBaseHueInput.addEventListener('input', () => {
+    const hue = editBaseHueInput.value;
+    const lightness = editBaseLightnessInput.value || 50;
+    colorSampleDiv.forEach(div => {
+        div.style.backgroundColor = `hsl(${hue}, 100%, ${lightness}%)`;
+    });
+});
+editBaseLightnessInput.addEventListener('input', () => {
+    const hue = editBaseHueInput.value || 210;
+    const lightness = editBaseLightnessInput.value;
+    colorSampleDiv.forEach(div => {
+        div.style.backgroundColor = `hsl(${hue}, 100%, ${lightness}%)`;
+    });
 });
 
 const acceptBtn = document.getElementById('accept-request-btn');
