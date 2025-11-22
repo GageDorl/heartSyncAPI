@@ -97,7 +97,7 @@ async function saveLetterEvent(e) {
     } else {
         type = "draft";
     }
-    const relationshipId = document.querySelector('.letter-list').getAttribute('data-relationship-id');
+    const relationshipId = document.querySelector('.letter-container').getAttribute('data-relationship-id');
     console.log("Submitting new letter for relationship:", relationshipId);
     const user = await fetchCurrentUser();
     const relationship = await fetchRelationship(user);
